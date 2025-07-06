@@ -1,25 +1,6 @@
 # BDF-Manual-main-en
-
 | 文件/目录 | 说明 |
 |----------|------|
-| **项目根目录** |  |
-| ├── **src/** |  |
-| │   ├── main.py |  |
-| │   ├── utils.py |  |
-| ├── **tests/** |  |
-| │   ├── test_main.py |  |
-| ├── **docs/** |  |
-| │   ├── API.md |  |
-| ├── .gitignore |  |
-| ├── requirements.txt |  |
-| ├── README.md |  |
-
-
-| 文件/目录 | 说明 |
-|----------|------|
-├── Makefile
-├── README.md
-├── Sphinx User Manual.docx
 ├── back
 │   ├── drt.rst
 │   ├── expandmo.rst
@@ -27,8 +8,6 @@
 │   ├── mrci.rst
 │   ├── traint.rst
 │   └── xianci.rst
-├── make.bat
-├── requirements.txt
 ├── source
 │   ├── Application.rst
 │   ├── Cite.rst
@@ -36,82 +15,11 @@
 │   ├── Example.rst
 │   ├── FQA.rst
 │   ├── GUI Guide.rst
-│   ├── HLCT-example
-│   │   ├── fig3.2-1.png
-│   │   ├── fig3.2-10.png
-│   │   ├── fig3.2-2.png
-│   │   ├── fig3.2-3.png
-│   │   ├── fig3.2-4.png
-│   │   ├── fig3.2-5.png
-│   │   ├── fig3.2-6.png
-│   │   ├── fig3.2-7.png
-│   │   ├── fig3.2-8.png
-│   │   ├── fig3.2-9.png
-│   │   ├── fig3.6-1.png
-│   │   ├── fig3.6-2.png
-│   │   ├── fig3.6-3.png
-│   │   ├── fig3.6-4.png
-│   │   ├── fig3.6-5.png
-│   │   ├── fig3.6-6.png
-│   │   ├── fig3.7-1.png
-│   │   └── mechanism.png
 │   ├── Input Library.rst
 │   ├── Input and Output.rst
 │   ├── Installation.rst
 │   ├── Introduction.rst
-│   ├── Irppy3-example
-│   │   ├── fig4.1-1.png
-│   │   ├── fig4.1-2.png
-│   │   ├── fig4.1-3.png
-│   │   ├── fig4.1-4.png
-│   │   ├── fig4.1-5.png
-│   │   ├── fig4.1-6.png
-│   │   ├── fig4.2-1.png
-│   │   ├── fig4.2-2.png
-│   │   ├── fig4.2-3.png
-│   │   ├── fig4.2-4.png
-│   │   ├── fig4.2-5.png
-│   │   ├── fig4.3-1.png
-│   │   ├── fig4.3-2.png
-│   │   └── fig4.3-3.png
 │   ├── References.rst
-│   ├── TADF-example
-│   │   ├── GA.png
-│   │   ├── HOMO.png
-│   │   ├── LUMO.png
-│   │   ├── T1-S1.png
-│   │   ├── TADF.jpg
-│   │   ├── Wavelength.png
-│   │   ├── energy.png
-│   │   ├── fig1.1-1.png
-│   │   ├── fig1.1-2.png
-│   │   ├── fig1.1-3.png
-│   │   ├── fig1.1-4.png
-│   │   ├── fig1.1-5.png
-│   │   ├── fig1.1-6.png
-│   │   ├── fig1.2-1.png
-│   │   ├── fig1.2-2.png
-│   │   ├── fig1.2-3.png
-│   │   ├── fig1.2-4.png
-│   │   ├── fig1.2-5.png
-│   │   ├── fig1.3-1.png
-│   │   ├── fig1.3-2.png
-│   │   ├── fig1.3-3.png
-│   │   ├── fig1.3-4.png
-│   │   ├── fig1.3-5.png
-│   │   ├── fig1.3-6.png
-│   │   ├── fig1.3-7.png
-│   │   ├── fig1.3-8.png
-│   │   ├── fig1.4-1.png
-│   │   ├── fig1.4-2.png
-│   │   ├── fig1.4-3.png
-│   │   ├── fig1.5-1.png
-│   │   ├── fig1.5-2.png
-│   │   ├── fig1.5-3.png
-│   │   ├── hole1-1.png
-│   │   ├── hole1-2.png
-│   │   ├── hole2-1.png
-│   │   └── hole2-2.png
 │   ├── User Guide.rst
 │   ├── app
 │   │   ├── HLCT-example.rst
@@ -133,21 +41,6 @@
 │   │   │   │   │   │   └── temple.inp
 │   │   │   │   │   ├── strip_2976.pdb
 │   │   │   │   │   └── tleap.in
-│   │   │   │   └── BPHimage
-│   │   │   │       ├── BPH3A.png
-│   │   │   │       ├── BPHandwat.png
-│   │   │   │       ├── QMMMzone.png
-│   │   │   │       ├── energy.png
-│   │   │   │       ├── fig1.jpg
-│   │   │   │       ├── fig1.png
-│   │   │   │       ├── groundenergy.png
-│   │   │   │       ├── groundshow.png
-│   │   │   │       ├── pres.png
-│   │   │   │       ├── s1energy.png
-│   │   │   │       ├── s1show.png
-│   │   │   │       ├── temp.png
-│   │   │   │       ├── tk.png
-│   │   │   │       └── vmdset.png
 │   │   │   ├── menprotein
 │   │   │   │   ├── menfilelist
 │   │   │   │   │   ├── kr2_mem.parm7
@@ -291,5 +184,5 @@
 │   │   ├── scf.rst
 │   │   ├── tddft.rst
 │   │   └── xuanyuan.rst
-└───└── refs.bib
+│   └── refs.bib
 
