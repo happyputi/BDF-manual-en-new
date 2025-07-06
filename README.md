@@ -2,12 +2,12 @@
 | 文件/目录 | 说明 |
 |----------|------|
 ├── back
-│  ├── drt.rst
-│  ├── expandmo.rst
-│  ├── mcscf.rst
-│  ├── mrci.rst
-│  ├── traint.rst
-│  └── xianci.rst
+│ ├── drt.rst
+│ ├── expandmo.rst
+│ ├── mcscf.rst
+│ ├── mrci.rst
+│ ├── traint.rst
+│ └── xianci.rst
 ├── source
 │   ├── Application.rst
 │   ├── Cite.rst
