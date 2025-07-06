@@ -2,6 +2,21 @@
 
 | 文件/目录 | 说明 |
 |----------|------|
+| **项目根目录** |  |
+| ├── **src/** |  |
+| │   ├── main.py |  |
+| │   ├── utils.py |  |
+| ├── **tests/** |  |
+| │   ├── test_main.py |  |
+| ├── **docs/** |  |
+| │   ├── API.md |  |
+| ├── .gitignore |  |
+| ├── requirements.txt |  |
+| ├── README.md |  |
+
+
+| 文件/目录 | 说明 |
+|----------|------|
 ├── Makefile
 ├── README.md
 ├── Sphinx User Manual.docx
