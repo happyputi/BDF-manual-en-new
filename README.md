@@ -17,8 +17,6 @@
 
 | 文件/目录 | 说明 |
 |----------|------|
-# BDF-Manual-main-en
-
 ├── Makefile
 ├── README.md
 ├── Sphinx User Manual.docx
