@@ -15,9 +15,9 @@
 ├── make.bat
 ├── requirements.txt
 ├── source
-|   ├── Application.rst
-    ├── Cite.rst
-    ├── Easyinput Guide.rst
+│   ├── Application.rst
+│   ├── Cite.rst
+│   ├── Easyinput Guide.rst
     ├── Example.rst
     ├── FQA.rst
     ├── GUI Guide.rst
