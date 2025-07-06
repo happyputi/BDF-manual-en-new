@@ -40,7 +40,7 @@
 │   │   ├── FirstExample.rst
 │   │   ├── Gaussian-Basis-Sets.rst
 │   │   ├── NMR.rst
-│   │   ├── Optimization.rst
+│   │   ├── Optimization.rst |校对中|陈奇欣|
 │   │   ├── Point-Charge.rst
 │   │   ├── Point-Group.rst
 │   │   ├── QM-MM.rst
@@ -54,12 +54,12 @@
 │   ├── index.rst
 │   ├── module
 │   │   ├── autofrag.rst
-│   │   ├── bdfopt.rst
+│   │   ├── bdfopt.rst |校对中|陈奇欣|
 │   │   ├── compass.rst
 │   │   ├── elecoup.rst
 │   │   ├── expandmo.rst
 │   │   ├── grad.rst
-│   │   ├── irc.rst
+│   │   ├── irc.rst |校对中|陈奇欣|
 │   │   ├── localmo.rst
 │   │   ├── mp2.rst
 │   │   ├── nmr.rst
