@@ -46,13 +46,6 @@
 │   │   │   │   │   ├── kr2_mem.parm7
 │   │   │   │   │   ├── kr2_mem.rst7
 │   │   │   │   │   └── opt.py
-│   │   │   │   ├── menimage
-│   │   │   │   │   ├── QM-MMzoneshow.jpg
-│   │   │   │   │   ├── compare.jpg
-│   │   │   │   │   ├── local+qm.jpg
-│   │   │   │   │   ├── tcl.png
-│   │   │   │   │   ├── top.jpg
-│   │   │   │   │   └── vmdset.png
 │   │   │   │   └── menprotein.rst
 │   │   │   └── qmmmboundary
 │   │   │       ├── qmmmboundaryfilelist
@@ -69,66 +62,10 @@
 │   │   ├── azulene-example.rst
 │   │   ├── moss.rst
 │   │   └── mssm-example.rst
-│   ├── azulene-example
-│   │   ├── fig5.1-1.png
-│   │   ├── fig5.1-10.png
-│   │   ├── fig5.1-11.png
-│   │   ├── fig5.1-12.png
-│   │   ├── fig5.1-13.png
-│   │   ├── fig5.1-14.png
-│   │   ├── fig5.1-15.png
-│   │   ├── fig5.1-2.png
-│   │   ├── fig5.1-3.png
-│   │   ├── fig5.1-4.png
-│   │   ├── fig5.1-5.png
-│   │   ├── fig5.1-6.png
-│   │   ├── fig5.1-7.png
-│   │   ├── fig5.1-8.png
-│   │   ├── fig5.1-9.png
-│   │   ├── fig5.2-1.png
-│   │   ├── fig5.2-10.png
-│   │   ├── fig5.2-11.png
-│   │   ├── fig5.2-12.png
-│   │   ├── fig5.2-13.png
-│   │   ├── fig5.2-14.png
-│   │   ├── fig5.2-15.png
-│   │   ├── fig5.2-16.png
-│   │   ├── fig5.2-17.png
-│   │   ├── fig5.2-18.png
-│   │   ├── fig5.2-19.png
-│   │   ├── fig5.2-2.png
-│   │   ├── fig5.2-3.png
-│   │   ├── fig5.2-4.png
-│   │   ├── fig5.2-5.png
-│   │   ├── fig5.2-6.png
-│   │   ├── fig5.2-7.png
-│   │   ├── fig5.2-8.png
-│   │   └── fig5.2-9.png
 │   ├── bash.sh
 │   ├── conf.py
 │   ├── easyinput
 │   │   └── controlkeywords.rst
-│   ├── files
-│   │   ├── ano-r2-ed.zip
-│   │   ├── ed-fe.zip
-│   │   ├── input.zip
-│   │   ├── test003.zip
-│   │   ├── test006.zip
-│   │   ├── test012.zip
-│   │   ├── test029.zip
-│   │   ├── test031.zip
-│   │   ├── test032.zip
-│   │   ├── test033.zip
-│   │   ├── test041.zip
-│   │   ├── test062.zip
-│   │   ├── test063.zip
-│   │   ├── test065.zip
-│   │   ├── test068.zip
-│   │   ├── test081.zip
-│   │   ├── test085.zip
-│   │   ├── test098.zip
-│   │   ├── test106.zip
-│   │   └── test116.zip
 │   ├── guide
 │   │   ├── Analysis.rst
 │   │   ├── FLMOMethod.rst
@@ -146,28 +83,6 @@
 │   │   ├── Solvent-Model.rst
 │   │   ├── TD.rst
 │   │   └── XCFunctional.rst
-│   ├── images
-│   │   ├── BDF_logo.png
-│   │   ├── BDFpromodules.png
-│   │   ├── Basic-Tab.png
-│   │   ├── C60-TDDFT-plotspec-example.png
-│   │   ├── Freq-Tab.png
-│   │   ├── MO-Tab.png
-│   │   ├── NAC-Tab.png
-│   │   ├── OPT-Tab.png
-│   │   ├── SAtddft.jpg
-│   │   ├── SCF-Tab.png
-│   │   ├── SOC-Tab.png
-│   │   ├── TDDFT-Tab.png
-│   │   ├── cineb.png
-│   │   ├── cineb2.png
-│   │   ├── irc.png
-│   │   ├── ketone-ECD-plotspec-example.png
-│   │   ├── modules.png
-│   │   ├── mssm-w.png
-│   │   ├── sTDDFT-example.png
-│   │   ├── zns.png
-│   │   └── 三个尺寸的BDF_32 32.png
 │   ├── index.rst
 │   ├── module
 │   │   ├── autofrag.rst
