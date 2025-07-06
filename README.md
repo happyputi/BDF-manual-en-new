@@ -26,44 +26,12 @@
 │   │   ├── Irppy3-example.rst
 │   │   ├── QMMM.rst
 │   │   ├── QMMM_example
-│   │   │   ├── BPH
-│   │   │   │   ├── BPHfilelist
-│   │   │   │   │   ├── 01_Min.in
-│   │   │   │   │   ├── 02_Heat.in
-│   │   │   │   │   ├── 03_Prod.in
-│   │   │   │   │   ├── BPH_new.crd
-│   │   │   │   │   ├── BPH_new.pdb
-│   │   │   │   │   ├── BPH_new.top
-│   │   │   │   │   ├── ground_opt
-│   │   │   │   │   │   └── opt.py
-│   │   │   │   │   ├── s1_opt
-│   │   │   │   │   │   ├── opt.py
-│   │   │   │   │   │   └── temple.inp
-│   │   │   │   │   ├── strip_2976.pdb
-│   │   │   │   │   └── tleap.in
 │   │   │   ├── menprotein
-│   │   │   │   ├── menfilelist
-│   │   │   │   │   ├── kr2_mem.parm7
-│   │   │   │   │   ├── kr2_mem.rst7
-│   │   │   │   │   └── opt.py
-│   │   │   │   └── menprotein.rst
-│   │   │   └── qmmmboundary
-│   │   │       ├── qmmmboundaryfilelist
-│   │   │       │   └── 5ala.pdb
-│   │   │       └── qmmmboundaryimage
-│   │   │           ├── 5ala.png
-│   │   │           ├── QM-1.jpg
-│   │   │           ├── QM-2.jpg
-│   │   │           ├── choose1.gif
-│   │   │           ├── choose2.gif
-│   │   │           ├── chose1.gif
-│   │   │           └── chose2.gif
+│   │   │       └── menprotein.rst
 │   │   ├── TADF-example.rst
 │   │   ├── azulene-example.rst
 │   │   ├── moss.rst
 │   │   └── mssm-example.rst
-│   ├── bash.sh
-│   ├── conf.py
 │   ├── easyinput
 │   │   └── controlkeywords.rst
 │   ├── guide
@@ -99,5 +67,4 @@
 │   │   ├── scf.rst
 │   │   ├── tddft.rst
 │   │   └── xuanyuan.rst
-│   └── refs.bib
 
