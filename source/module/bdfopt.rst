@@ -1,6 +1,6 @@
 Molecular Structure Optimization - BDFOPT Module
 ================================================
-The BDFOPT module is BDF's molecular geometry optimization module, used to locate energy minima, transition states, conical intersections, etc. Unlike other modules, input files containing the bdfopt module are not executed linearly in module order; see the "Quick Start" section on structure optimization for details.
+The BDFOPT module is BDF's molecular geometry optimization module, used to locate energy local minima, transition states, conical intersections, etc. Unlike other modules, input files containing the bdfopt module are not executed linearly in module order; see the "Quick Start" section on structure optimization for details.
 
 :guilabel:`Solver` Parameter Type: Integer
 ------------------------------------------------
