@@ -45,8 +45,8 @@
 │   │   ├── Point-Group.rst
 │   │   ├── QM-MM.rst
 │   │   ├── Relativity.rst
-│   │   ├── SCF.rst
-│   │   ├── SCFTech.rst
+│   │   ├── SCF.rst  |校对中|罗贞|
+│   │   ├── SCFTech.rst |校对中|罗贞|
 │   │   ├── Solvent-Dielectric.rst
 │   │   ├── Solvent-Model.rst
 │   │   ├── TD.rst
@@ -64,7 +64,7 @@
 │   │   ├── mp2.rst
 │   │   ├── nmr.rst
 │   │   ├── resp.rst
-│   │   ├── scf.rst
+│   │   ├── scf.rst |校对中|罗贞|
 │   │   ├── tddft.rst
 │   │   └── xuanyuan.rst
 
