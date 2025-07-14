@@ -43,8 +43,8 @@
 │   │   ├── Optimization.rst |校对中|陈奇欣|
 │   │   ├── Point-Charge.rst
 │   │   ├── Point-Group.rst
-│   │   ├── QM-MM.rst
-│   │   ├── Relativity.rst
+│   │   ├── QM-MM.rst |校对中｜高军｜
+│   │   ├── Relativity.rst  |校对中｜高军｜
 │   │   ├── SCF.rst  |校对中|罗贞|
 │   │   ├── SCFTech.rst |校对中|罗贞|
 │   │   ├── Solvent-Dielectric.rst
