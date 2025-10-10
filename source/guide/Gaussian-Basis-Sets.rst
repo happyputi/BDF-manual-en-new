@@ -1,7 +1,7 @@
 # Gaussian Basis Sets
 ================================================
 
-To solve Hartree-Fock or Kohn-Sham DFT equations, molecular orbitals are expanded as linear combinations of one-electron basis functions:
+To solve Hartree-Fock or Kohn-Sham DFT equations, molecular orbitals are expanded as linear combinations of atomic orbitals (basis functions) as:
 
 .. math::
     \varphi_{i}(r) = C_{1,i}\chi_{1}(r) + C_{2,i}\chi_{2}(r) + C_{3,i}\chi_{3}(r) + \dots + C_{N,i}\chi_{N}(r)
@@ -27,14 +27,14 @@ For angular momentum *L* > *p* (e.g., *d*, *f*), GTOs have two representations:
       N Y^L_m r^L {\rm exp}(-\alpha r^2)
    With :math:`2L+1` components (e.g., *d*: -2, -1, 0, +1, +2).
 
-Cartesian functions facilitate integral calculations but contain redundancies. Spherical harmonics correspond directly to magnetic quantum numbers, so integrals are typically computed in Cartesian form then transformed :cite:`schlegel1995`.
+Cartesian functions are easy to be used in integral calculations but are redundant. Spherical harmonics correspond directly to anglular momentum quantum numbers, so integrals are usually computed in Cartesian form then transformed to Spherical form:cite:`schlegel1995`.
 
 .. attention::
   1. Most modern basis sets are optimized for spherical harmonics.
   2. Spherical harmonics offer better accuracy and numerical stability (especially in relativistic calculations), so BDF uses them exclusively.
-  3. Results differ between Cartesian and spherical bases. Reproducing BDF results requires matching structure, method, basis set, and spherical basis usage.
+  3. Results differ between Cartesian and spherical basis functions. Reproducing BDF results requires matching structure, method, basis set, and spherical basis usage.
 
-Named collections of optimized GTOs for different elements/conditions are called **Gaussian Basis Sets**. BDF's basis sets primarily come from:
+The pre-optimized GTOs for different elements are called **Gaussian Basis Sets**. BDF's basis sets primarily come from:
 * [Basis Set Exchange](https://www.basissetexchange.org/) :cite:`bse2019` (all-electron, scalar ECPs)
 * [Stuttgart/Cologne Pseudopotentials](http://www.tc.uni-koeln.de/PP/clickpse.en.html) (SOECPs, f-in-core)
 * [Turbomole Basis Sets](http://www.cosmologic-services.de/basis-sets/basissets.php)
@@ -47,7 +47,7 @@ Named collections of optimized GTOs for different elements/conditions are called
 
 Additional basis sets from original publications include Dirac-RPF-4Z :cite:`dasilva2014,dasilva2014a,dasilva2017`, DKH2 basis sets :cite:`peterson2007`, Pitzer pseudopotentials :cite:`pitzer2000`, CRENBL/CRENBS :cite:`ermler1991,ermler1994,ermler1997,ermler1999`, and Stuttgart-ECPMDFSO-QZVP :cite:`dolg2009,dolg2014`.
 
-BDF users can use standard basis sets or custom definitions.
+BDF users can use standard basis sets or customed basis sets.
 
 ## All-Electron Basis Sets
 ------------------------------------------------
@@ -329,10 +329,10 @@ Standard basis sets optimize valence/semi-core properties. Nuclear property calc
 ------------------------------------------------
 
 Effective Core Potentials (ECPs) include Pseudopotentials (PP) and Model Core Potentials (MCP). 
-In quantum chemistry calculations, PPs are fundamentally similar to those in plane-wave calculations but expressed in concise analytical form. 
+In quantum chemistry calculations, PPs are fundamentally similar to those in plane-wave calculations but expressed in the analytical form. 
 Most quantum chemistry software, including BDF, supports PPs, while fewer support MCPs. Therefore, the terms ECP and PP can be used interchangeably when unambiguous.
 
-Pseudopotential basis sets are used in conjunction with pseudopotentials, with basis functions describing only the atom's valence electrons. For systems involving heavy atoms, pseudopotential basis sets can be applied to these atoms while other atoms use standard non-relativistic all-electron basis sets. 
+Pseudopotential basis sets are used in conjunction with pseudopotentials, with basis functions describing only the atom's semi-core and valence electrons. For systems involving heavy atoms, pseudopotential basis sets can be applied to these atoms while other atoms use standard non-relativistic all-electron basis sets. 
 This approach significantly reduces computation time while effectively incorporating scalar relativistic effects. Basis sets like the Lan series, Stuttgart series, and cc-pVnZ-PP series belong to this category. For convenience, pseudopotential basis sets for lighter elements (before the 5th period) are essentially non-relativistic all-electron basis sets, such as the Def2 series.
 
 ## Scalar vs. Spin-Orbit Coupling Pseudopotentials
@@ -382,7 +382,7 @@ Pseudopotential basis sets are categorized into **scalar pseudopotential basis s
 
 ## f-in-Core Pseudopotential Basis Sets
 ------------------------------------------------
-For lanthanides and actinides, "f-in-core" (FIC) basis sets incorporate f electrons into the pseudopotential. BDF includes these FIC scalar pseudopotential basis sets optimized for common oxidation states, with scalar relativistic effects (MWB) accounted for in reference data.
+For lanthanides and actinides, "f-in-core" (FIC) basis sets put f electrons into the pseudopotential. BDF includes these FIC scalar pseudopotential basis sets optimized for common oxidation states, with scalar relativistic effects (MWB) accounted for in reference data.
 
 ### FIC Pseudopotential Basis Sets in BDF
 .. table:: 
@@ -437,25 +437,24 @@ P      2    2
 ****
 Al     13    2
 (Section for Al - similar format)
-In addition to the above standard names, some base groups in the base group library can also use their aliases and abbreviations. The basic rules are as follows:
+In addition to the above standard names, some basis sets in the basis sets library can also use their aliases and abbreviations. The rules are as follows:
 
-* In the Pople base set of the 6-series, the suffixes P and PP representing the polarization function can be indicated by an asterisk. For example, 6-311 G** is equivalent to 6-311 GPP.
-* The hyphen "-" for the def2-series base group can be omitted. For example, def2-SVP can be written as def2SVP.
-* In the association consistency base group, "cc-pV", "cc-pCV", and "cc-pwCV" can be abbreviated as V, CV, WCV, respectively.
+* In the Pople basis sets of the 6-series, the suffixes P and PP representing the polarization function can be indicated by an asterisk. For example, 6-311 G** is equivalent to 6-311 GPP.
+* The hyphen "-" for the def2-series basis sets can be omitted. For example, def2-SVP can be written as def2SVP.
+* In the correlation consistency basis sets, "cc-pV", "cc-pCV", and "cc-pwCV" can be abbreviated as V, CV, WCV, respectively.
 The prefix "aug-" for the diffusion function can be abbreviated as A (case-insensitive).
-For example, vdz stands for cc-pVDZ, awcvtz-dk stands for aug-cc-pwCVTZ-DK, and so on. It should be noted that this abbreviation of the base group name is limited to BDF input.
-Do not use it in formal papers and reports to avoid confusion among readers.
+For example, vdz stands for cc-pVDZ, awcvtz-dk stands for aug-cc-pwCVTZ-DK, and so on. It should be noted that this abbreviation of the basis sets name should be only used in BDF input. Do not use them in formal publications and reports to avoid confusion among readers.
 
 
 .. _SelfdefinedBasis:
 
-Customize the base group file
+Customize the basis set file
 ------------------------------------------------
-BDF can use non-built-in base groups, in this case, you need to save the base group data in text format in the base group file, put it in the calculation directory, and the file name is the base group name to be referenced in BDF.
+BDF can use non-built-in basis sets, in this case, you need to save the basis set data in text format in the basis set file, put it in the calculation directory (BDF work directory), and the file name is the basis set to be referenced in BDF.
 
 .. warning::
 
-The file name of the custom base group file must be **all caps**! However, when referenced in the input file, the case is arbitrary.
+The file name of the custom basis set file must be **all caps**! However, when referenced in the input file, the case is arbitrary.
 
 For example, create a text file MYBAS-1 in the computing directory (note: if you create a text file under the Windows operating system, the system may omit the extension *.txt*, so the actual name is MYBAS-1.txt) and read:
 
@@ -464,39 +463,39 @@ For example, create a text file MYBAS-1 in the computing directory (note: if you
    # This is my basis set No. 1.               # Any blank lines, and comment lines that start with #
    # Supported elements: He and Al
 
-   ****                                        # The line preceding with 4 asterisks, followed by a base group of elements
+   ****                                        # The line preceding with 4 asterisks, followed by the basis set of an element
    He      2    1                              # Element symbol, nuclear charge number, highest angular momentum of the basis function 1
-   S      4    2                               # S-type GTO basis functions, 4 original functions are reduced to 2
+   S      4    2                               # S-type GTO basis functions, 4 primitive functions are contracted to 2
                   3.836000E+01                 # Exponents of 4 S-type Gaussian primitive functions
                   5.770000E+00
                   1.240000E+00
                   2.976000E-01
-         2.380900E-02           0.000000E+00   # Two columns of shrinkage factors, corresponding to the two shrinkage S-type GTO basis functions
+         2.380900E-02           0.000000E+00   # Two columns of contraction coefficents, corresponding to the two contracted S-type GTO basis functions
          1.548910E-01           0.000000E+00
          4.699870E-01           0.000000E+00
          5.130270E-01           1.000000E+00
-   P      2    2                               # P-type GTO basis functions, the 2 original functions are reduced to 2
+   P      2    2                               # P-type GTO basis functions, the 2 primitive functions are contracted to 2
                   1.275000E+00
                   4.000000E-01
          1.0000000E+00           0.000000E+00
          0.0000000E+00           1.000000E+00
-   ****                       # 4 asterisks end the base group of He, followed by the base group of another element, or end
+   ****                       # 4 asterisks end the base group of He, followed by the basis set of another element, or end
    Al     13    2
    (omitted)
 
-In the above base group, the P function is not contracted, and can also be written in the following form:
+In the above basis set, the P function is acturally not contracted, and can also be written in the following form:
 
 .. code-block::
 
 (S-function, omitted)
 
-  P      2    0              # 0 indicates non-contraction, and a contraction factor is not required at this time
+  P      2    0              # 0 indicates non-contraction, and the contraction confficents is not required at this time
                   1.275000E+00
                   4.000000E-01
    ****
    (omitted)
 
-For pseudopotential basis groups, ECP data also needs to be provided after the valence basis function. For example
+For pseudopotential basis sets, ECP data also needs to be provided after the valence basis function. For example
 
 .. code-block::
 
@@ -523,8 +522,8 @@ For pseudopotential basis groups, ECP data also needs to be provided after the v
    D       1    1
                0.19330000
         1.0000000000
-   ECP                     # The valence function is immediately followed by the keyword ECP (all caps), indicating that the ECP data part is followed
-   Al    10    2    2      # Same element symbol, core electron number, ECP highest angular momentum, optional SOEPP highest angular momentum
+   ECP                     # The valence function is immediately followed by the keyword ECP (all caps), indicating that the ECP data input is followed
+   Al    10    2    2      # Same element symbol, number of core electron, ECP highest angular momentum, optional SOEPP highest angular momentum
    D potential  4                                    # The number of potential functions of the highest angular momentum (D function) of the ECP
       2      1.22110000000000     -0.53798100000000  # Power of R, exponent, factor (the same below)
       2      3.36810000000000     -5.45975600000000
@@ -572,13 +571,13 @@ Once the above data is saved, the MYBAS-1 base group can be called in the BDF in
        mybas-1         # Gives the name of the base group file in the current directory, which is not case-sensitive
     $End
 
-Custom basesets must be entered with BDF's blend mode. In the second line, enter the base group set to **genbas**, and the custom base group file name needs to use the keyword '''Basis'' in the **COMPASS** module, and the value is ''mybas-1''', which means that the base group file named ''MYBAS-1'' is called.
+Custom basis sets must be entered with BDF's mixed-input mode or adavanced input moded. In the second line, enter the basis set to **genbas**, and the custom basis set file name needs to use the keyword '''Basis'' in the **COMPASS** module, and the value is ''mybas-1''', which means that the base group file named ''MYBAS-1'' is called.
 
-Assignment of the base group
+Assignment of the basis set 
 ------------------------------------------------
-**Use the same BDF built-in base set for all atoms**
+**Use the same BDF built-in basis set for all atoms**
 
-The concise input mode is specified in either Method/Functional/Base Group or Method/Base Group. Here ''Base Group'' is the built-in base group name of the BDF listed in the previous sections, and the input character is not case sensitive, as follows:
+The easy input mode is specified in either Method/Functional/Basis set or Method/Basis set. Here ''Basis Set'' is the built-in base group name of the BDF listed in the previous sections, and the input character is not case sensitive, as follows:
 
 .. code-block:: bdf
 
@@ -601,7 +600,7 @@ The concise input mode is specified in either Method/Functional/Base Group or Me
    Cl  0.000   0.000    1.400
    End geometry
 
-In the case of advanced input mode, the basis group used for the calculation is specified in the compass module using the keyword ''basis'', for example
+In the case of advanced input mode, the basis set used for the calculation is specified in the compass module using the keyword ''basis'', for example
 
 .. code-block:: bdf
 
@@ -614,16 +613,16 @@ In the case of advanced input mode, the basis group used for the calculation is 
   End geometry
   $end
 
-where lanl2dz calls the built-in LanL2DZ basegroup (registered in the basisname) file, which is not case-sensitive.
+where lanl2dz calls the built-in LanL2DZ basis set (registered in the basisname) file, which is not case-sensitive.
 
-**Specify different base groups for different elements**
+**Specify different basis sets for different elements**
 
-Concise input does not support custom or mixed base groups, you must use mixed input mode, that is, set the base group to genbas in the method/functional/base group, and add the **COMPASS** module input, using the "basis-block" keyword to specify the base group.
+Easy input does not support custom or mixed basis sets, you must use mixed input mode, that is, set the basis set to genbas in the method/functional/basis set, and add the **COMPASS** module input, using the "basis-block" keyword to specify the basis set.
 
-If you specify a base group with different names for different elements, you need to put it in the "basis-block" ... "end basis" block of the **COMPASS module,
-The first line is the default base group, and the following lines specify other base groups for different elements, in the format *element=basegroupname* or *element1, element2, ..., elementn=basegroupname*.
+If you specify a basis set with different names for different elements, you need to put it in the "basis-block" ... "end basis" block of the **COMPASS module,
+The first line is the default basis set, and the following lines specify other basis sets for different elements, in the format *element=basissetname* or *element1, element2, ..., elementn=basissetnam*.
 
-For example, in mixed input mode, the following is an example of using different base groups for different atoms:
+For example, in mixed input mode, the following is an example of using different basis sets for different atoms:
 
 .. code-block:: bdf
 
@@ -642,7 +641,7 @@ For example, in mixed input mode, the following is an example of using different
   End Basis
   $end
 
-In the example above, H uses the 3-21G base group, while Cl without additional definition uses the default LanL2DZ base group.
+In the example above, H uses the 3-21G basis set, while Cl without additional definition uses the default LanL2DZ basis set.
 
 If it's an advanced input, look like this:
 
@@ -659,9 +658,9 @@ If it's an advanced input, look like this:
   End geometry
   $end
 
-**Specify different base groups for different atoms of the same element**
+**Specify different basis sets for different atoms of the same element**
 
-BDF can also specify different named base groups for different atoms in the same element, which need to be distinguished by an arbitrary number after the element symbol. For example
+BDF can also specify different named basis sets for different atoms in the same element, which need to be distinguished by an arbitrary number after the element symbol. For example
 
 
 .. code-block:: bdf
@@ -685,14 +684,14 @@ BDF can also specify different named base groups for different atoms in the same
   End basis
   $end
 
-In the example above, the cc-pVDZ group is used for the two hydrogen atoms of type H1, the 3-21G group is used for the two hydrogen atoms of type H2, and the 6-31G group is used for the carbon atom. It should be noted that symmetric equivalent atoms must use the same basis set, which will be checked by the program;
-If symmetric equivalents must use different base groups, you can set a lower point group symmetry by Group, or turn off symmetry with Nosymm.
+In the example above, the cc-pVDZ is used for the two hydrogen atoms of type H1, the 3-21G is used for the two hydrogen atoms of type H2, and the 6-31G is used for the carbon atom. It should be noted that symmetric equivalent atoms must use the same basis set, which will be checked by the program;
+If symmetric equivalents must use different basis sets, you can set a lower point group symmetry by Group, or turn off symmetry with Nosymm.
 
-Auxiliary base group
+Auxiliary basis set
 ------------------------------------------------
-The method of using the density fitting approximation (RI) requires a secondary base group. The Ahlrichs family of base groups and Dunning-related consistency groups as well as other individual base groups have specially optimized auxiliary groups. In the BDF, it is possible to specify the auxiliary base group in the compass by the keywords "RI-J", "RI-K", and "RI-C". where ''RI-J'' is used to specify the coulomb-fitting base group, ''RI-K'' is used to specify the coulomb-related fitting base group, and ''RI-C'' is used to specify the coulomb-related fitting base group. The auxiliary base groups supported by BDF are stored in the corresponding folder in the $BDFHOME/basis_library directory.
+The method of using the density fitting approximation (RI) requires a secondary basis set. The Ahlrichs family of basis sets and Dunning-related consistency sets as well as other individual basis sets have specially optimized auxiliary sets. In the BDF, it is possible to specify the auxiliary basis set in the compass by the keywords "RI-J", "RI-K", and "RI-C". where ''RI-J'' is used to specify the coulomb-fitting basis set, ''RI-K'' is used to specify the coulomb-related fitting basis set, and ''RI-C'' is used to specify the coulomb-related fitting basis setp. The auxiliary basis sets supported by BDF are stored in the corresponding folder in the $BDFHOME/basis_library directory.
 
-High-level density fitting basesets can be used on low-level basesets, e.g. cc-pVTZ/C can be used to make RI-J on cc-pVTZ, and for pople series basesets that do not have a standard auxiliary baseset, such as 6-31G**, they can also be used for cc-pVTZ/J or RIJCOSX. On the other hand, the combination of high-level orbital base groups and low-level auxiliary base sets will bring more obvious errors.
+High-level density fitting basesets can be used on low-level basesets, e.g. cc-pVTZ/C can be used to make RI-J on cc-pVTZ, and for pople series basesets that do not have a standard auxiliary baseset, such as 6-31G**, they can also be used for cc-pVTZ/J or RIJCOSX. On the other hand, the combination of high-level orbital base groups and low-level auxiliary basis sets will bring more obvious errors.
 
 . code-block:: bdf
 
@@ -710,7 +709,7 @@ High-level density fitting basesets can be used on low-level basesets, e.g. cc-p
   End Geometry
   $End
 
-In the example above, the methane molecule is computed using the def2-SVP basis set and accelerated by using the def2-SVP standard coulomb-fitting base set.
+In the example above, the methane molecule is computed using the def2-SVP basis set and accelerated by using the def2-SVP standard coulomb-fitting basis set.
 
 .. hint::
-The RI calculation function of BDF is used to accelerate the calculation methods of wave functions such as MCSCF and MP2, and it is not recommended for users to use them in the calculations of SCF and TDDFT, and users can use the multi-stage expansion Coulomb potential (MPEC) method, which does not rely on auxiliary base groups, and the calculation speed and accuracy are comparable to those of the RI method.
+The RI calculation function of BDF is used to accelerate the calculation methods of wave functions such as MCSCF and MP2, and it is not recommended for users to use them in the calculations of SCF and TDDFT, and users can use the multipole expansion Coulomb potential (MECP) method, which does not rely on auxiliary base groups, and the calculation speed and accuracy are comparable to those of the RI method.

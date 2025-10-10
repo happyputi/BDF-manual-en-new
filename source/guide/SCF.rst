@@ -3,16 +3,16 @@ Self-consistent field methods: Hartree-Fock and Kohn-Sham
 
 Self-consistent fields of BDF include the Hartree-Fock and Kohn-Sham methods.
 
-Restrictive Hartree-Fock method
+Restricted Hartree-Fock method (RHF)
 -----------------------------------------------------------------
 
-An example of the restrictive Hatree-Fock method (RHF) is mentioned in the section <FirstExample> and will not be repeated here.
+An example of the restricted Hatree-Fock method (RHF) is mentioned in the section <FirstExample> and will not be repeated here.
 
-Non-restrictive Hartree-Fock method
+Unrestricted Hartree-Fock method (UHF)
 -----------------------------------------------------------------
 
 For systems with unpaired electrons, the UHF method is required, and the restricted open-shell Hartree-Fock method can also be used, see below.
-For odd-numbered electron systems, the BDF defaults to a spin multiplicity of 2 and is calculated using UHF. For example, calculate the :math:'\ce{C3H5}' numerator,
+For odd-numbered electron systems, the BDF set the spin multiplicity to 2 in UHF on default. For example, calculate the :math:'\ce{C3H5}' numerator,
 
 .. code-block:: bdf
 
@@ -130,7 +130,7 @@ Additional output information can be found in the RHF calculation example, which
 
 For example, the above output shows that there is about 1 single electron with a spin down on atom 1C, and about 1 single electron with a spin up on carbon atoms 2 and 3.
 
-Restrictive shell-opening Hartree-Fock method
+Restricted open-shell Hartree-Fock method (ROHF)
 ------------------------------------------------------------------------------------------
 
 Restricted open-shell Hartree-Fock (ROHF) can also be used to calculate the molecular system of open shells. Here is a ROHF example of a :math:'\ce{CH2}' triplet state.
@@ -142,8 +142,8 @@ Restricted open-shell Hartree-Fock (ROHF) can also be used to calculate the mole
     
     geometry   # 输入坐标单位 Angstrom
      C     0.000000        0.00000        0.31399
-     H 0.000000 -1.65723 -0.94197
-     H 0.000000 1.65723 -0.94197
+     H     0.000000 -1.65723 -0.94197
+     H     0.000000 1.65723 -0.94197
     end geometry
 
 Here, in the second line, specify the ROHF method and use the keyword spinmulti=3' to set the calculation of the triplet state. The output of ROHF is similar to that of UHF.
@@ -202,7 +202,7 @@ Due to the difference in the number of occupancy of '''Alpha'' and ''Beta''' orb
 
 RKS, UKS, and ROKS calculations
 -------------------------------------------------
-For the Restricted Kohn-Sham (RKS) method, an example of the RKS calculation of the :math:'\ce{H2O}' molecule is given in a concise input mode, using the B3lyp functional.
+For the Restricted Kohn-Sham (RKS) method, an example of the RKS calculation of the :math:'\ce{H2O}' molecule is given in a easy input mode, using the B3lyp functional.
 
 .. code-block:: bdf
 
@@ -240,7 +240,7 @@ This input corresponds to the input of the advanced mode
       b3lyp
     $end
 
-Here, the input requires the use of the B3lyp functional. Compared to Hartree-Fock, the output has more contributions from Exc terms, as follows:
+Here, the input requires the use of the B3lyp functional. Compared to Hartree-Fock, the output has the energy of Exc terms, as follows:
 
 .. code-block:: 
 
@@ -255,7 +255,7 @@ Here, the input requires the use of the B3lyp functional. Compared to Hartree-Fo
      E_xc  =                -7.50177140
     Virial Theorem      2.006909
 
-ROKS calculation of :math:'\ce{H2O+}' ions, with the following concise inputs,
+ROKS calculation of :math:'\ce{H2O+}' ions, with the following input,
 
 .. code-block:: bdf
 
@@ -271,7 +271,7 @@ ROKS calculation of :math:'\ce{H2O+}' ions, with the following concise inputs,
     end geometry
 
 .. hint::
-    In contrast to Hartree-Fock, Kohn-Sham requires the advanced input to specify the exchange-related functional using the dft keyword. If you are a concise input, you only need to specify the swap-related functional and base group. The system chooses to use either RKS or UKS depending on the spin state, and if ROKS is to be used, it must be explicitly entered.
+    In contrast to Hartree-Fock, Kohn-Sham requires the advanced input to specify the exchange-related functional using the dft keyword. If you are using the easy input, you only need to specify the XC functional and basis set. The system chooses to use either RKS or UKS depending on the spin state, and if ROKS is to be used, it must be explicitly entered.
 
 
 Kohn-Sham calculations based on RS hybrid functionals
@@ -318,10 +318,10 @@ For example, for the 1,3-Butadiene molecule, the RKS advanced mode input of CAM-
    $end
 
 
-Exact exchange terms and related term components for custom hybrid functionals, double hybrid functionals
+Customize the exact HF-exchange term in hybrid functionals, double hybrid functionals
 -----------------------------------------------------------
 
-For some calculations, the user may need to manually adjust the exact commutative component of the functional to achieve satisfactory accuracy. In this case, you can add the keyword "facex" to the "$scf" module, for example, if you want to change the exact commutative component of the B3LYP functional from the default 20% to 15%, you can write it
+For some calculations, the user may need to manually adjust the exact HF-exchange of an XC functional to achieve satisfactory accuracy. In this case, you can add the keyword "facex" to the "$scf" module, for example, if you want to change the exact HF-exchange of the B3LYP functional from the default 20% to 15%, you can write it
 
 .. code-block:: bdf
 
@@ -333,12 +333,12 @@ For some calculations, the user may need to manually adjust the exact commutativ
     0.15
    $end
 
-Similarly, the MP2-related term component of the double-hybrid functional can be customized with the keyword ''facco''. Note that not all functionals support custom facex and facco (see the keyword list for SCF modules <scf>).
+Similarly, the MP2-related correlation term component of the double-hybrid functional can be adjusted with the keyword ''facco''. Note that not all functionals support customized facex and facco (see the keyword list for SCF modules <scf>).
 
 Dispersion correction for weak interactions
 -------------------------------------------------
-Common exchange-related functionals such as B3lyp do not describe weak interactions well, and dispersion correction needs to be added when calculating energy or optimizing molecular structure. The BDF was developed by Stefan Grimme
-For the D3 dispersion correction method, you need to specify the D3 keyword in the input of the SCF module, and enter as follows,
+Common XC functionals such as B3LYP could not describe weak interactions well, and dispersion correction needs to be added when calculating energy or optimizing molecular structure. BDF supports the semi-empirical dispersion correction method D3 developed by Stefan Grimme.
+For the D3 dispersion correction, you need to specify the D3 keyword in the input of the SCF module, and enter as follows,
 
 .. code-block:: bdf
 
@@ -359,7 +359,7 @@ For the D3 dispersion correction method, you need to specify the D3 keyword in t
 
 .. tip::
 
-    * The BDF mixed-mode input method is used here, and the SCF calculation is precisely controlled by adding SCF module keywords on the basis of concise input.
+    * The BDF mixed-mode input method is used here, and the SCF calculation is precisely controlled by adding SCF module keywords on the basis of easy-mode input.
 
 
 After the Kohn-Sham calculation is completed, dispersion correction is added, and the calculated output is as follows,
@@ -393,11 +393,11 @@ The total energy ''E_tot' contains the dispersion correction energy, ''E_disp = 
 Improve the accuracy of the integration grid of Kohn-Sham calculations
 -------------------------------------------------
 
-Although BDF defines default integration lattice points for different functionals according to the accuracy requirements (e.g., Meta-GGA functionals have high requirements for integration lattice, BDF uses fine grid points by default),
-Users may also want to adjust the points grid. The integral lattice points of the Kohn-Sham functional can be defined in the input of the SCF module by the Grid keyword, the valid value of Grid is Ultra coarse,
+Although BDF defines default integration grid points for different functionals according to the accuracy requirements (e.g., Meta-GGA functionals have high requirements for integration grid, BDF uses fine grid points by default),
+Users may also want to adjust the grid. The integral grid points of the Kohn-Sham functional can be defined in the input of the SCF module by the Grid keyword.
 There are 5 "Coarse", "medium", "fine", "Ultra fine", etc., from "Ultra coarse" to "Ultra fine", and the numerical integration accuracy is increased sequentially.
 
-Example: M062X calculation of the :math:'\ce{H2O}' molecule. This functional is a hybrid Meta-GGA type functional, which requires dense integration grid points, so the input uses a mix of advanced input and concise input modes, as follows:
+Example: M062X calculation of the :math:'\ce{H2O}' molecule. This functional is a hybrid Meta-GGA type functional, which requires dense integration grid points, so the input uses a mix of advanced input and easy input modes, as follows:
 
 .. code-block:: bdf
 
@@ -487,5 +487,5 @@ When the energy converges to within 0.01 Hartree, it switches to the Ultra fine 
       Numerical Grid Generated SUCCESSFULLY! 
      Total and symmetry independent Grid Number:     94208     24827
 
-Here, the integral lattice points of H and O atoms are both 100*1202, where 100 is the number of radial lattice points and 1202 is the number of angular lattice points.
+Here, the integral grid points of H and O atoms are both 100*1202, where 100 is the number of radial grid points and 1202 is the number of angular grid points.
 

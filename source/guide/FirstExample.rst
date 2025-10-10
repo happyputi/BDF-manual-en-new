@@ -2,7 +2,7 @@
 
 First Example: RHF Calculation of :math:`\ce{H2O}` Molecule
 ================================================
-Hartree-Fock is the most fundamental algorithm in quantum chemistry. In this section, we will guide users through a Hartree-Fock calculation of a water molecule using BDF, analyzing input and output information. We first present the concise input for BDF. To help users understand the difference between BDF's concise and advanced input modes, we also provide the corresponding advanced input file for each concise input.
+Hartree-Fock is the most fundamental algorithm in quantum chemistry. In this section, we will guide users performing a Hartree-Fock calculation of a water molecule using BDF.  The input and output of BDF will be analysised. We first present the easy input for BDF. To help users understand the difference between BDF's easy and advanced input modes, we also provide the corresponding advanced input file for each easy input. Notice that the easy input of BDF is still in developing. At present, the adavanced input mode is usually used.
 
 Preparing Input
 -------------------------------------------------------
@@ -59,9 +59,9 @@ From the advanced input, it can be seen that BDF will sequentially execute the *
 * Basis set defined as `3-21G` via `Basis`.
 
 .. note::
-    Only in concise input can variables (e.g., R1 in the example) be used to define internal coordinates and assign values later. Advanced input requires direct numerical definition of internal coordinates; variables are not supported.
+    Only in the easy input can variables (e.g., R1 in the example) be used to define internal coordinates and assign values later. Advanced input requires direct numerical definition of internal coordinates; variables are not supported.
 
-After executing **COMPASS**, BDF uses **XUANYUAN** to compute one- and two-electron integrals. BDF defaults to **Integral Direct SCF**, where integrals are recomputed as needed.
+After executing **COMPASS**, BDF uses **XUANYUAN** to compute one- and two-electron integrals. On default, BDF performs **Integral Direct SCF** calculation, where the two-electron respulsion integrals  (2e-ERIs) are recomputed as needed in each SCF iteration. Therefore, only one-electron integrals are calculated in xuanyuan and 2e-ERIs will be skipped.
 
 Finally, BDF executes the **SCF** module to perform the self-consistent field (SCF) calculation based on Hartree-Fock:
 * `RHF` specifies the Restricted Hartree-Fock method;
@@ -119,7 +119,7 @@ After calculation, files `h2o.out`, `h2o.chkfil`, and `h2o.scforb` are generated
 * `h2o.chkfil`: Binary file for data transfer between BDF modules;
 * `h2o.scforb`: Text file storing SCF molecular orbital coefficients, orbital energies, etc., used for restarts or as initial guesses.
 
-If concise input is used, `h2o.out` first displays basic settings:
+If the easy input is used, `h2o.out` first displays basic settings:
 
 .. code-block:: bdf 
 

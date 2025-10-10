@@ -3,6 +3,9 @@ Get started quickly
 
 This chapter introduces the basic use of BDF's various functions, and provides basic examples and data reading and analysis instructions for specific calculation functions.
 
+.. note::
+    BDF english manual is transfered from chinese manual by AI tool. It is still in checking and improving.
+
 .. include:: guide/FirstExample.rst
 
 .. include:: guide/Gaussian-Basis-Sets.rst
