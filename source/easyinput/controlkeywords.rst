@@ -1,9 +1,9 @@
-Concise Input Keywords
+Easy Input Keywords
 ===============================
 
 ### Required Parameters: :guilabel:`Method/Functional/Basis`, :guilabel:`Functional/Basis`, :guilabel:`Method/Basis`
 ----------------------------------------------------------------------------------------
-Required parameters in concise input mode are used to set computational methods, functionals for DFT/TDDFT calculations, basis sets, etc. Currently supported computational methods include:
+Required parameters in easy input mode are used to set computational methods, functionals for DFT/TDDFT calculations, basis sets, etc. Currently supported computational methods include:
 
 +-------------------+------------------------------------------------------------------+
 | Method              | Functionality                                                     |

@@ -1,6 +1,6 @@
-Concise input
+Easy input
 ************************************
 
-In this chapter, we will introduce the BDF concise input control keyword.
+In this chapter, we will introduce the BDF easy input control keyword.
 
 .. include:: easyinput/controlkeywords.rst
