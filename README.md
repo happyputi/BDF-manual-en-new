@@ -11,7 +11,7 @@
 ├── source
 │   ├── Application.rst
 │   ├── Cite.rst
-│   ├── Easyinput Guide.rst
+│   ├── Easyinput Guide.rst |Done|Bingbing Suo|
 │   ├── Example.rst
 │   ├── FQA.rst
 │   ├── GUI Guide.rst
@@ -33,12 +33,12 @@
 │   │   ├── moss.rst
 │   │   └── mssm-example.rst
 │   ├── easyinput
-│   │   └── controlkeywords.rst
+│   │   └── controlkeywords.rst |Done|Bingbing Suo|
 │   ├── guide
 │   │   ├── Analysis.rst
 │   │   ├── FLMOMethod.rst
-│   │   ├── FirstExample.rst
-│   │   ├── Gaussian-Basis-Sets.rst
+│   │   ├── FirstExample.rst |Done | Bingbing Suo|
+│   │   ├── Gaussian-Basis-Sets.rst | Done | Bingbing Suo|
 │   │   ├── NMR.rst
 │   │   ├── Optimization.rst |校对中|陈奇欣|
 │   │   ├── Point-Charge.rst
