@@ -4,19 +4,19 @@
 Time-dependent density functional theory
 ================================================
 
-BDF supports a variety of excited state calculation methods, among which the linear response time-dependent density functional (TDDFT) method based on the Kohn-Sham reference state and the Tamm-Dancoff approximation (TDA) of the TDDFT method are the main ones. Compared with other quantification software, BDF's TDDFT module is unique, mainly reflected in:
+BDF supports a variety of excited state calculation methods, among which the linear response time-dependent density functional theory (TDDFT) based on the Kohn-Sham reference state and the Tamm-Dancoff approximation (TDA) of TDDFT are the main ones. Compared with other softwares, BDF's TDDFT module is specilized on following terms:
 
 1. Support various spin-flip methods;
-2. The spin-matched TDDFT method X-TDDFT is supported, which can effectively solve the problem of spin pollution in the excited state when the reference state is an open shell, and is suitable for the calculation of excited states in free radicals, transition metals and other systems.
-3. Support core excited state related calculations, such as calculating X-ray absorption spectroscopy (XAS). In order to calculate an excited state, the general TDDFT algorithm often needs to calculate all states with a lower excitation energy than the excited state, and the energy of the core excited state is usually very high, so the calculation efficiency is too low. The iVI method used in BDF can directly calculate all excited states in a higher energy range without calculating the lower excited states, thus saving computational resources.
-4. Support the calculation of first-order non-adiabatic coupling matrix element (fo-NACME, or NACME for short), especially NACME between excited states and excited states. NACME is mainly used to study non-radiative transition processes, such as calculating the internal slew rate constant with the Fermi Golden Rule in combination with MOMAP software (see azulene-example<> in conjunction with the Fermi Golden Rule), or studying the processes of internal conversion and photochemical reactions with non-adiabatic dynamics. Many quantum chemistry programs support NACME between ground and excited states, but few programs support NACME between excited and excited states, so BDF has unique advantages over most existing quantum chemistry programs for the internal conversion from excited state to excited state and polymorphic photochemical reactions.
+2. The spin-adapted TDDFT method X-TDDFT is supported, which can effectively solve the problem of spin contaimination in the excited state when the reference state is an open shell, and is suitable for the calculation of excited states in free radicals, transition metals and other systems.
+3. Support core excited state related calculations, such as calculating X-ray absorption spectroscopy (XAS). In order to calculate an excited state, the ordinary TDDFT algorithm often needs to calculate all states with a lower excitation energy than the targeted excited state since the energy of the core excited state is usually very high, so the calculation efficiency is too low. The iVI algorithm used in BDF can directly calculate all excited states in a higher energy range without calculating the lower excited states, thus saving computational resources.
+4. Support the calculation of first-order non-adiabatic coupling matrix element (fo-NACME, or NACME for short), especially NACME between excited states and excited states. NACME is mainly used to study non-radiative transition processes, such as calculating the internal convension rate constant with the Fermi Golden Rule in combination with MOMAP software (see azulene-example<> in conjunction with the Fermi Golden Rule), or studying the processes of internal conversion and photochemical reactions with non-adiabatic dynamics. Many quantum chemistry programs support NACME between ground and excited states, but few programs support NACME between excited and excited states, so BDF has unique advantages over most existing quantum chemistry programs for the internal conversion from excited state to excited state and polymorphic photochemical reactions.
 
 In addition to TDDFT, BDF also supports the calculation of excited states at the SCF level using the mom method <momMethod>.
 
 .. danger::
 
-    All functionals of the SCAN family (e.g., SCAN0, r2SCAN) have the problem of "triple state instability" :cite:'scan_problem',
-    Do not use for TDDFT spin flip calculations (e.g., triple excited states for closed shell systems). TDA is recommended in this case.
+    All functionals of the SCAN family (e.g., SCAN0, r2SCAN) have the problem of "triple state instability" :cite:'scan_problem'.
+    Do not use them for TDDFT spin flip calculations (e.g., triple excited states from a closed shell reference state). TDA is recommended in this case.
 
 
 Calculation of closed shell system: R-TDDFT
@@ -38,8 +38,8 @@ Calculate the excitation energy of the :math:'\ce{H2O}' molecule using TDDFT as 
   R1=1.0       # OH bond length in angstrom
   end geometry
 
-Here, the keyword ''TDDFT/B3lyp/cc-pvdz'' specifies that the TDDFT calculation is performed with the functional '''B3lyp'' and the base group ''cc-pVDZ''.
-The corresponding high-level inputs are:
+Here, the keyword ''TDDFT/B3lyp/cc-pvdz'' specifies that the TDDFT calculation is performed with the functional '''B3lyp'' and the basis set ''cc-pVDZ''.
+The corresponding adavanced input is:
 
 .. code-block:: bdf
 
@@ -68,8 +68,7 @@ The corresponding high-level inputs are:
     1       #on default, 10 roots are calculated for each irreps if advanced input used
   $end
 
-COMPLETING THE CALCULATION WILL CALL THE FOUR MODULES COMPASS, XUANYUAN, SCF, AND TDFT IN ORDER. where the SCF module performs the RKS calculation.
-Based on the calculation results of the RKS, the subsequent TDDFT calculation is carried out.
+Completing the calculation will execute four BDF modules COMPASS, XUANYUAN, SCF, and TDDFT, in which the SCF module performs the RKS calculation. Based on the calculation results of the RKS, the subsequent TDDFT calculation is carried out.
 
 Note that because the water molecule belongs to the :math:'\rm C_{2v}' point group, there are 4 irreducible representations, and the excited states with different irreducible representations are solved separately, so depending on the user's needs, there are several ways to specify the number of excited states, such as:
 
@@ -82,7 +81,7 @@ Note that because the water molecule belongs to the :math:'\rm C_{2v}' point gro
    1
   $END
 
-In this case, the probability of the calculated excited state of each irreducible representation is the excited state with the lowest energy under the irreducible representation, but this cannot be guaranteed, that is, there is a small probability that it will converge to a second excited state or even a higher excited state. If you want to increase the probability of getting the lowest excited state, you can write
+In this case, the calculated excited state of each irreducible representation is the excited state with the lowest energy under the irreducible representation, but this cannot be guaranteed, that is, there is a small probability that it will converge to a second excited state or even a higher excited state. If you want to increase the probability of getting the lowest excited state, you can write
 
 .. code-block:: bdf
   
@@ -183,7 +182,7 @@ The output of the Kohn-Sham computation has already been described, and here we 
 
 Over here
 
-* ''R-TD-DFT'' indicates that TDDFT is being computed based on the restrictive ground state wave function;
+* ''R-TD-DFT'' indicates that TDDFT is being computed based on the restriced ground state wave function;
 * ''isf= 0'' means that the calculation does not flip the spin;
 ialda= 0 indicates that the Full non-collinear Kernel is used, which is the default Kernel for non-spin-flipped TDDFT.
 
@@ -230,8 +229,8 @@ The TDDFT module will also print the active orbital information calculated by TD
    23 1 A1 11 0 94.37171 2.81
    24 3 B1 7 0 99.90789 2.86
 
-Here, orbits 1-5 are occupied orbits, and 6-24 are imaginary orbits, where the 5th and 6th orbits are HOMO and LUMO orbits, respectively, which belong to irreducible representation B2 and irreducible representation A1, respectively.
-The orbital energies are -7.62124 eV and 1.23186 eV, respectively. Since the :math:'\ce{H2O}' numerator has 4 irreducible representations, TDDFT solves each irreducible representation one by one.
+Here, orbits 1-5 are occupied orbital, and 6-24 are virtual orbital, where the 5th and 6th orbital are HOMO and LUMO, respectively, which belong to irreducible representation B2 and irreducible representation A1, respectively.
+The orbital energies are -7.62124 eV and 1.23186 eV, respectively. Since the :math:'\ce{H2O}' molecule has 4 irreducible representations, TDDFT solves each irreducible representation one by one.
 Before entering the Davidson iteration to solve Casida's equation, the system estimates the memory usage,
 
 .. code-block:: 
@@ -250,12 +249,11 @@ Before entering the Davidson iteration to solve Casida's equation, the system es
   Estimated mem for dvdson storage (RPA) =           0.042 M          0.000 G
   Estimated mem for dvdson storage (TDA) =           0.017 M          0.000 G
 
-Here, the system statistically stores about 0.053MB of memory for JK operators, and 512MB for input settings (see the "memjkop" keyword).
-The system prompts RPA calculation, that is, full TDDFT calculation can count 1 root each time (one pass), and TDA calculation can count 2 roots at a time. Due to the small molecular system, the memory is sufficient.
-When the molecular system is large, if the number of allowable countable roots output here is less than the number of system settings, the TDDFT module will pass according to the maximum allowable number of countable roots
-The JK operator is constructed by multiple integration calculations, which leads to the reduction of computational efficiency, and the user needs to use the keyword "memjkop" to increase the memory.
+Here, the TDDFT module uses about 0.053 MB of memory for JK operators, and 512 MB for input settings (see the "memjkop" keyword).
+The system performs RPA calculation, that is, full TDDFT calculation can consider 1 root each time (one integral pass), and TDA calculation can consider 2 roots at a time. Due to this is a small molecule, the memory is sufficient.
+When the molecule is large, if the number of allowed roots in one integral pass here is less than the number of system settings, in each integral pass the TDDFT module will calculate the maximum allowable number of roots that reduces the computational efficiency due to two electron repulsion integrals will be calculated several times, and the user needs to use the keyword "memjkop" to increase the memory for reducing the number of integral pass.
 
-Davidson's iterative start of the calculation output information is as follows,
+Davidson diagonalization algorithm is used in TDDFT calculation, and the calculation output information is as follows,
 
 .. code-block:: 
 
@@ -329,7 +327,7 @@ The convergence information is as follows:
             0.3446513056
      ------------------------------------------------------------------
   
-As you can see from the first line of the output above, 5 iterations compute convergence. The system then prints the information in the convergent electronic state,
+As you can see from the first line of the output above, the computation converges after 5 iterations. The system then prints the information in the convergent electronic state,
 
 .. code-block:: 
 
@@ -346,13 +344,13 @@ where the information in line 1,
 * ''D<Pab>= 0.0000'' is the difference between the <S^2> of the excited state and the <S^2> of the ground state (for the spin-conserved transition, this value reflects the degree of spin pollution in the excited state; For spin flipping transitions, the difference between this value and the theoretical value ''S(S+1)(excited state)-S(S+1)(ground state)'' reflects the degree of spin pollution in the excited state);
 * ''Ova= 0.5201'' is the absolute overlap integral (the value range is [0,1], the closer the value is to 0, the more obvious the charge transfer characteristic of the corresponding excited state, otherwise, the more obvious the local excitation feature).
 
-Lines 2 and 3 give the information about the excited principal configuration
+Lines 2 and 3 give the information about main excited configurations
 
 * ''CV(0):'' where CV(0) indicates that the excitation is a Core to Virtual orbital excitation, and 0 indicates a Singlet excitation;
-* ''A1(3)-> A1(4)'' gives the occupy-empty orbital pair of the electron transition, and the electron jumps from the 3rd orbital represented by A1 to the 4th orbital represented by A1, combined with the output orbital information above, it can be seen that this is the excitation from HOMO-2 to LUMO;
+* ''A1(3)-> A1(4)'' gives the occupy-virtual orbital pair of the electron transition, and the electron is exciteed from the 3rd orbital of A1 to the 4th orbital of A1, combined with the output orbital information above, it can be seen that this is the excitation from HOMO-2 to LUMO;
 * ''c_i: 0.9883'' indicates that the linear combination coefficient of the transition in the whole excited state is 0.9883;
 * ''Per: 97.7%'' indicates that the excitation configuration accounts for 97.7%;
-* ''IPA: 10.736 eV'' represents that the energy difference between the two orbits involved in this transition is 10.736 eV;
+* ''IPA: 10.736 eV'' represents that the energy difference between the two orbitals involved in this transition is 10.736 eV;
 * ''Oai: 0.5163'' means that if the excited state is contributed by only this one transition, then the absolute overlap integral of the excited state is 0.5001, from which it is easy to know which transitions are locally excited and which are charge-transfer excitations.
 
 
@@ -402,7 +400,7 @@ Here, the key words
 * ''charge=1'' specifies that the charge of the system is +1;
 * ''group=C(1)'' specifies that the C1 point group is forced to be used for calculation.
 
-The corresponding high-level input is,
+The corresponding advanced input is,
 
 .. code-block:: bdf
 
@@ -410,10 +408,8 @@ The corresponding high-level input is,
   #Notice: The unit of molecular coordinate is angstrom
   geometry
     Or
-    H 1 R1
-    H 1 R1 2 109.
-    
-    R1=1.0     # OH bond length in angstrom 
+    H 1 1.0
+    H 1 1.0 2 109.
   end geometry
   basis
     cc-pVDZ 
@@ -425,7 +421,7 @@ The corresponding high-level input is,
   $end
    
   $scf
-  door
+  UKS
   dft
    b3lyp
   charge
@@ -443,7 +439,7 @@ A few details to note for this input are:
 
 * In the ''compass'' module, the keyword ''group'' is used to force the calculation to use the ''C(1)'' point group;
 * ''scf'' module sets ''UKS'' to calculate, ''charge'' is ''1'', ''spinmulti'' (spin multiplicity, 2S+1)=2;   
-* The iroot of the tddft module is set to count 4 roots for each irreducible representation, and the first four excited states of the cation given are calculated due to the C1 symmetry.
+* The iroot of the tddft module is set to calculate 4 roots for each irreducible representation, and the first four excited states of the cation given are calculated due to the C1 symmetry.
 
 As can be seen from the following output, the U-TDDFT calculation is performed:
 
@@ -477,8 +473,8 @@ The D<S^2>'' value of the third excited state is larger, indicating that there i
 
 Open shell system: X-TDDFT (also known as SA-TDDFT)
 ----------------------------------------------------------
-X-TDDFT is a spin-matched TDDFT method used to calculate open shell systems.
-The excited state of the double-occupancy-to-imaginary orbital excited state (labeled as CV(1) in BDF) of the U-TDDFT triple state coupling of the open-shell system has the problem of spin pollution, so its excitation energy is often underestimated. X-TDDFT can be used to solve this problem. Considering the :math:'\ce{N2+}' molecule, the concise computational input for X-TDDFT is:
+X-TDDFT is a spin-adapted TDDFT method used to calculate open shell systems.
+The CV(1) type excited state of the doubly occupied (core orbital) to virtual orbital excited state (CV(1), 1 means two electrons are the triplet coupling) of U-TDDFT  of the open-shell system has the problem of spin contaimination, so its excitation energy is often underestimated. X-TDDFT can be used to solve this problem. Considering the :math:'\ce{N2+}' molecule, the easy input for X-TDDFT is:
 
 .. code-block:: bdf
 
@@ -573,17 +569,17 @@ The excited state output is,
    39 B3g 5 B3g 22.1001 eV 56.10 nm 0.0000 0.0031 99.2% OV(0): Ag( 3)-> B3g( 2 ) 23.220 0.204 21.3099
    40 B1g 5 B1g 23.4663 eV 52.84 nm 0.0000 0.0027 99.8% OV(0): Ag( 3)-> B1g( 1 ) 25.135 0.283 22.6761
 
-Here, the 4th, 6th, and 7th excited states are all CV(1) states. Note that the 'D<S^2>'' values calculated by SA-TDDFT are calculated according to the formula of U-TDDFT, which can approximate the degree of spin pollution of the resulting states if these states are calculated by U-TDDFT, but does not represent the actual degree of spin pollution of these states, because SA-TDDFT can ensure that all excited states are strictly free of spin pollution. Therefore, if the value of D<S^2>'' of a state calculated by SA-TDDFT is large, it does not indicate that the results of this state are unreliable, but on the contrary, it means that SA-TDDFT is much better than that of U-TDDFT for this state.
+Here, the 4th, 6th, and 7th excited states are all CV(1) states. Note that the 'D<S^2>'' values calculated by X-TDDFT are calculated according to the formula of U-TDDFT, which can approximate the degree of spin contaimination of the resulting states if these states are calculated by U-TDDFT, but does not represent the actual degree of spin contaimination of these states, because X-TDDFT can ensure that all excited states are strictly free of spin contaimination. Therefore, if the value of D<S^2>'' of a state calculated by X-TDDFT is large, it does not indicate that the results of this state are unreliable, but on the contrary, it means that X-TDDFT is much better than that of U-TDDFT for this state.
 
 The triplet excited state was calculated by using the closed-shell singlet state as the reference state
 ----------------------------------------------------------
 
-From the ground state of the closed shell of the :math:'\ce{H2O}' molecule, the triple excited state can be calculated. The concise input is:
+From the ground state of the closed shell of the :math:'\ce{H2O}' molecule, the triple excited state can be calculated. The easy input is:
 
 .. code-block:: bdf
 
   #! bdf.sh
-  tdft/b3lyp/cc-pvdz iroot=4 spinflip=1
+  tddft/b3lyp/cc-pvdz iroot=4 spinflip=1
   
   geometry
   Or
@@ -593,7 +589,7 @@ From the ground state of the closed shell of the :math:'\ce{H2O}' molecule, the 
   R1=1.0     # OH bond length in angstrom
   end geometry
 
-Note that although the keyword is spinflip, this calculation is not a spin-flip TDDFT calculation, as it calculates the :math:'M_S = 0' component of the triplet excited state instead of the :math:'M_S = 1' component. The corresponding high-level inputs are:
+Note that although the keyword is spinflip, this calculation is not a spin-flip TDDFT calculation, as it calculates the :math:'M_S = 0' component of the triplet excited state instead of the :math:'M_S = 1' component. The corresponding advanced inputs are:
 
 .. code-block:: bdf
 
@@ -660,7 +656,7 @@ At the end of the TDDFT calculation, the output information is as follows:
 
 Among them, ''Spin change: isf= 1'' indicates that the state with spin multiplicity greater than the ground state by 2 (i.e., triplet state) is calculated, because the ground state is a singlet state, and the transition from the ground state to the excited state is spin-forbidden, so the oscillator strength and transition dipole moment are both 0.
 
-By default, TDDFT only calculates the excited state that is the same as the spin of the reference state, for example, the ground state of the molecule is a singlet state, and the TDDFT value calculates the singlet excited state, if you want to calculate both a singlet and a triplet state, the input is:
+By default, TDDFT only calculates the excited state that has the same spin multiplicity with the reference state, for example, the ground state of the molecule is a singlet state, and the TDDFT value calculates the singlet excited state, if you want to calculate both a singlet and a triplet state, the input is:
 
 .. code-block::
 
@@ -708,7 +704,7 @@ Since the singlet to triplet transition is dipole forbidden, the oscillator stre
 Spin-flip TDDFT calculations
 ----------------------------------------------------------
 
-BDF can not only calculate triplet states from singlet states, but also from **2S+1** heavy states with higher spin multiplicity (S = 1/2, 1, 3/2, ... ) to start and flip the spin upwards to calculate the **2S+3** heavy state; The **TDDFT/TDA** of the spin upturn gives the transition state of the alpha electron to the unoccupied beta orbital with the double occupancy orbital, labeled as ''CV(1)'' excitation. Unlike the case where the ground state is a closed-shell singlet, the BDF calculates the **2S+3** heavy state :math:'M_S = S+1' component, so when the ground state is not a closed-shell singlet, the calculation can be called a spin-flipped TDDFT calculation. The input file format for the TDDFT calculation with spin upward flipping is exactly the same as when the ground state is a closed-shell singlet state and the triplet excited state is calculated, for example, the following input file uses the doublet state as the reference state to calculate the quadruple excited state:
+BDF can not only calculate triplet states from singlet states, but also from **2S+1** states with higher spin multiplicity (S = 1/2, 1, 3/2, ... ) to start and flip the spin upwards to calculate the **2S+3** state; The **TDDFT/TDA** of the spin upturn gives the transition state of the alpha electron to the unoccupied beta orbital with the double occupancy orbital, labeled as ''CV(1)'' excitation. Unlike the case where the ground state is a closed-shell singlet, the BDF calculates the **2S+3** state :math:'M_S = S+1' components, so when the ground state is not a closed-shell singlet, the calculation can be called a spin-flipped TDDFT calculation. The input file format for the TDDFT calculation with spin-up flipping is exactly the same as when the ground state is a closed-shell singlet state and the triplet excited state is calculated, for example, the following input file uses the doublet state as the reference state to calculate the quadruple excited state:
 
 .. code-block:: bdf
 
@@ -726,7 +722,7 @@ BDF can not only calculate triplet states from singlet states, but also from **2
    1
   $end
 
-In addition, BDF can also start from the triplet state and flip the spin downwards to calculate the singlet state, in which case ''isf'' needs to be set to ''-1''. Of course, it is also possible to flip down from a state with a higher spin multiplicity to calculate a state with less spin multiplicity of 2. It should be noted that the **TDDFT/TDA** of spin downflip can only correctly describe the electronic state of the transition from the alpha orbital occupied by the open shell to the beta orbital occupied by the open shell, and is labeled as the **OO(ab)** transition, and the states of other transition types have spin pollution problems.
+In addition, BDF can also start from the triplet state and flip the spin downwards to calculate the singlet state, in which case ''isf'' needs to be set to ''-1''. Of course, it is also possible to flip down from a state with a higher spin multiplicity to calculate a state with less spin multiplicity of 2. It should be noted that the **TDDFT/TDA** of spin downflip can only correctly describe the electronic state of the transition from the alpha orbital occupied by the open shell to the beta orbital occupied by the open shell, and is labeled as the **OO(ab)** transition, and the states of other transition types have spin contaimination problems.
 
 Starting from the triplet state, invert the spin downwards to calculate the singlet state, and the input is:
 
@@ -754,7 +750,7 @@ The output is:
     3 A 3 A 0.5166 eV 2399.85 nm 0.0000 -1.9935 54.0% OO(ab): A(6)-> A(6) 2.712 0.999 9.1225
     4 A 4 A 2.3121 eV 536.24 nm 0.0000 -0.9994 99.9% OV(ab): A( 6 )-> A( 7 ) 4.671 0.872 10.9180
 
-Here, the first three states are all excited states of the **OO(ab)** type, in which the first and third states are basically pure singlet states (D<S^2> about equal to -2, that is, the <S^2> of the excited state is about equal to 0), and the second state is basically pure triplet states (D<S^2> about equal to 0); The fourth state is the **OV(ab)** type excited state, which has a spin pollution problem (D<S^2> is about equal to -1, that is, the excited state is about <S^2> is about equal to 1, between the singlet and triplet states), and its excitation energy is unreliable.
+Here, the first three excited states are the **OO(ab)** type, in which the first and third states are singlet states (D<S^2> about equal to -2, that is, the <S^2> of the excited state is about equal to 0), and the second state is triplet states (D<S^2> about equal to 0); The fourth state is the **OV(ab)** type, which has the spin contaimination problem, as indicated by (D<S^2> is about equal to -1, that is,  <S^2> of this state is about equal to 1, being in between the singlet and triplet states), and its excitation energy is unreliable.
 
 
 .. warning::
@@ -762,12 +758,12 @@ Here, the first three states are all excited states of the **OO(ab)** type, in w
    * BDF currently only supports spin-flipped TDA, not spin-flipped TDDFT. However, the calculation of the triplet excited state with the closed-shell singlet state as the reference state is not subject to this limitation.
 
 
-UV-Vis and XAS spectra were calculated using the iVI method
+Calculate UV-Vis and XAS spectra using the iVI method
 -------------------------------------------------------
 
-The above examples are based on the Davidson method to solve the excited states of TDDFT. In order to find an excited state with the Davidson method, it is generally necessary to solve all the excited states with lower energies at the same time, so when the energy of the target excited state is high (for example, when calculating the XAS spectrum), the Davidson method requires too many computational resources to obtain the results due to the limited computational time and memory. In addition, when the user uses the Davidson method, the number of excited states to be solved must be specified before the calculation, but many times the user does not know that the excited state he needs is the first excited state before the calculation, but only knows the approximate energy range of the excited state he needs, which makes the user must go through a series of trial and error, first set a small number of excited states for calculation, if you find that you do not calculate the state you need, and then increase the number of excited states and recalculate until you find the state you need. Obviously, this will consume the user's energy and time for no reason.
+All above examples are based on the Davidson algorithm to solve Casida equation of TDDFT. In order to find an excited state with the Davidson method, it is generally necessary to solve all the excited states with lower energies at the same time, so when the energy of the target excited state is high (for example, when calculating the XAS spectrum), a large number of excited states should be obtained by the Davidson method that requires too many computational resources. In addition, when the user uses the Davidson method, the number of excited states to be solved must be specified before the calculation, but many times the user does not know which root is the targeted excited state before the calculation, but only knows the approximate energy range, which makes the user must go through a series of trial and error, first set a small number of excited states for calculation, if you find that you do not calculate the state you need, and then increase the number of excited states and recalculate until you find the state you need. Obviously, this will consume the user's energy and time for no reason.
 
-BDF's iVI approach provides a solution to these problems. In the iVI method, the user can specify a range of excited energies of interest (e.g., the entire visible region, or the K-edge region of carbon) without having to estimate how many excited states there are in that range; The program can calculate all the excited states within the excitation energy range, on the one hand, there is no need to calculate the excited states with lower energies than the range as in the Davidson method, and on the other hand, it can ensure that all the excited states in the energy range are obtained without omission. Here are two examples:
+BDF's iVI approach provides a solution to these problems. In the iVI method, the user can specify an energy range of the interested excited states (e.g., the entire visible region, or the K-edge region of carbon) without having to estimate how many excited states there are in that range; The program can calculate all the excited states within the given energy range, and there is no need to calculate the excited states with lower energies than the energy range as in the Davidson method. It can ensure that all the excited states in the energy range are obtained. Here are two examples:
 
 (1) Calculate the absorption spectrum of DDQ radical anion in the range of 400-700 nm (X-TDDFT, wB97X/LANL2DZ)
 
@@ -785,12 +781,12 @@ BDF's iVI approach provides a solution to these problems. In the iVI method, the
    C                  0.00000000   -2.81252550   -0.25536084
    C                  0.00000000   -1.29206304    2.09336443
    C                 -0.00000000    1.29206304    2.09336443
-   Cl 0.00000000 -3.02272954 4.89063172
-   Cl -0.000000000 3.02272954 4.89063172
+   Cl                 0.00000000   -3.02272954    4.89063172
+   Cl                -0.00000000    3.02272954    4.89063172
    C                  0.00000000   -2.72722649   -4.89578100
    C                 -0.00000000    2.72722649   -4.89578100
-   N 0.00000000 -3.86127688 -6.78015122
-   N -0.000000000 3.86127688 -6.78015122  
+   N                  0.00000000   -3.86127688   -6.78015122
+   N                 -0.00000000    3.86127688   -6.78015122  
    O                  0.00000000   -5.15052650   -0.22779097
    O                 -0.00000000    5.15052650   -0.22779097
   End geometry
@@ -830,7 +826,7 @@ BDF's iVI approach provides a solution to these problems. In the iVI method, the
    2048
   $end
 
-Since the numerator belongs to the :math:'\rm C_{2v}' point group, there are four irreducible representations (A1, A2, B1, B2), and the program solves the TDDFT problem under the four irreducible representations. Taking the irreducible representation of A1 as an example, after the iterative convergence of iVI, the program outputs the following information:
+Since the molecule belongs to the :math:'\rm C_{2v}' point group, there are four irreducible representations (A1, A2, B1, B2), and the program solves the TDDFT problem under the four irreducible representations. Taking the irreducible representation of A1 as an example, after the iterative convergence of iVI, the program outputs the following information:
 
 .. code-block::
 
@@ -861,7 +857,7 @@ Since the numerator belongs to the :math:'\rm C_{2v}' point group, there are fou
        CV(bb): A1( 20 )-> A2( 5 ) c_i: -0.1121 For: 1.3% PAHs: 11.748 eV Oai: 0.3581
        CV(bb): B1( 18 )-> B2( 6 ) c_i: 0.2040 Per: 4.2% IPA: 13.866 eV Oai: 0.4328
 
-It can be seen that the program calculates 17 excited states under this irreducible representation, but only one of them (excitation energy 0.106 au = 2.89 eV) is within the user-specified wavelength range (400-700 nm) and thus completely converges (as a small residual); The rest of the excited states are far before they converge, and the program knows that they are not in the range of interest to the user, so it no longer tries to converge these excited states (which are characterized by large residuals), thus saving a lot of computational effort.
+It can be seen that the program calculates 17 excited states in A1 irreducible representation, but only one of them (excitation energy 0.106 au = 2.89 eV) is within the user-specified wavelength range (400-700 nm) and thus completely converges (as a small residual); The rest of the excited states do not converge, and the program knows that they do not lie in the interested energy range, so it no longer tries to converge them (which are characterized by large residuals), thus saving a lot of computational effort.
 
 After all 4 irreducible representations are calculated, the program summarizes the calculation results of each irreducible representation as usual:
 
@@ -938,9 +934,9 @@ From the experiments, it is known that the K-edge absorption of carbon is around
      14   A   15   A  284.1224 eV      4.36 nm   0.0008   0.0000  98.2%  CV(0):   A(   7 )->   A(  96 ) 287.601 0.707    6.9920
      15   A   16   A  284.4174 eV      4.36 nm   0.0000   0.0000  93.7%  CV(0):   A(   3 )->   A(  93 ) 289.434 0.509    7.2869
 
-However, it can be seen from the excited state composition that only the two excited states with an excitation energy of 280.8642 eV and 280.8973 eV are the excitation of C1s to the valence orbital, and the rest of the excitation is the excitation of the valence orbital to the very high Rydberg orbital, that is, the background absorption corresponding to the ionization of valence shell electrons.
+However, it can be seen from the excited state composition that only the two excited states with the excitation energy of 280.8642 eV and 280.8973 eV are the excitation of C1s to the valence orbital, and the rest of the excitation is the excitation of the valence orbital to the very high Rydberg orbital, that is, the background absorption corresponding to the ionization of valence shell electrons.
 
-In addition, even if the user does not have the need to compute all excited states in a certain energy interval without duplication or leakage, iVI has another advantage over the Davidson method, which is that it requires less memory. The memory required by Davidson's method increases linearly with the number of iterations, and although BDF reduces memory consumption by computing excited states in batches and reconstructing Krylov subspaces every few dozen iterations, this will lead to an increase in the number of iterations, thus increasing the computation time. However, the iVI method does not increase with the iteration because the Krylov subspace is reconstructed at each iteration, and the memory consumption of the algorithm does not increase with the iteration, which can save 2~10 times the memory consumption compared with the Davidson method. Therefore, when the memory required by the Davidson method exceeds the available physical memory of the current node, but by less than 10 times, there is a certain probability that the computation will be completed properly with the given memory limit. For example, here's how it might be written
+In addition, even if the user does not need to compute all excited states in a certain energy interval without duplication or leakage, iVI has another advantage over the Davidson method, which is that it requires less memory. The memory required by Davidson's method increases linearly with the number of iterations, and although BDF reduces memory consumption by computing excited states in batches and reconstructing Krylov subspaces every few dozen iterations, this will lead to an increase in the number of iterations, thus increasing the computation time. However, the iVI method does not increase with the iteration because the Krylov subspace is reconstructed at each iteration, and the memory consumption of the algorithm does not increase with the iteration, which can save 2~10 times the memory consumption compared with the Davidson method. Therefore, when the memory required by the Davidson method exceeds the available physical memory of the current node, but by less than 10 times, there is a certain probability that the computation will be completed properly with the given memory limit. For example, here's how it might be written
 
 .. code-block:: bdf
 
@@ -951,12 +947,12 @@ In addition, even if the user does not have the need to compute all excited stat
    -100
   $end
 
-That is, the 100 spin-protected excited states with the lowest energy are calculated by the iVI method. When the memory is sufficient, the computation time is about the same as the Davidson method; When the memory does not meet the needs of the Davidson method, but the gap is not too far, the Davidson method will exit with an error due to insufficient memory, or the number of iterations will increase (or even not converge) due to frequent rebuilding of the Krylov subspace, while the iVI method can still converge normally.
+That is, the 100 spin-conserved excited states with the lowest energy are calculated by the iVI method. When the memory is sufficient, the computation time is about the same as the Davidson method; When the memory does not meet the requirment of the Davidson method, but the gap is not too far, the Davidson method will exit with an error due to insufficient memory, or the number of iterations will increase (or even not converge) due to frequent rebuilding of the Krylov subspace, while the iVI method can still converge normally.
 
-Methods for fast approximation of the absorption spectra of large systems: sTDA, sTDDFT
+The approximated methods for calculating the absorption spectra of large systems: sTDA, sTDDFT
 -------------------------------------------------------
 
-Traditional TDDFT methods often encounter severe CPU and memory bottlenecks when calculating the absorption spectra of large systems (e.g., hundreds of atoms), resulting in the computation not being completed within a given computation time and memory constraints. This is not only because of the more computational resources required to compute each excited state, but also because the larger the system, the greater the number of excited states in a certain wavelength range (e.g., visible region). Therefore, if the absorption spectrum is to be calculated in a given wavelength range, the time and memory consumption required for TDDFT computation not only increases rapidly with the size of the system, but also increases with the ratio of the time and memory required to the SCF step as the system size increases. That is, when the system is large enough, even if only the TDDFT step is approximated, but not the SCF step, a great speedup can be obtained and a lot of memory can be saved. As mentioned above, the iVI method can reduce the memory required for TDDFT calculation to a certain extent without introducing any errors. The MPEC+COSX method <MPECCOSX> reduces the calculation time of TDDFT to about 1/10~1/3 (depending on the size of the base group and the size of the system) at the cost of introducing a very small (generally less than 0.01 eV) error. However, if the requirements for the accuracy of the results are lower, for example, even an error of the order of 0.2 eV is acceptable, the sTDA and sTDDFT sTDA_RSH methods developed by Grimme's group can be used to accelerate the TDDFT calculation, which can be tens to hundreds of times faster than ordinary TDDFT. In BDF, the ''grimmestd'' keyword can be used to specify the use of the sTDA or sTDDFT method.
+Traditional TDDFT methods often encounter severe CPU and memory bottlenecks when calculating the absorption spectra of large systems (e.g., hundreds of atoms), resulting in the computation not being completed within a given computation time and memory constraints. This is not only because of the more computational resources required to compute each excited state, but also because the larger the system, the greater the number of excited states in a certain wavelength range (e.g., visible region). Therefore, if the absorption spectrum is to be calculated in a given wavelength range, the time and memory consumption required for TDDFT computation not only increases rapidly with the size of the system, but also increases with the ratio of the time and memory required to the SCF step as the system size increases. That is, when the system is large enough, even if only the TDDFT step is approximated, but not the SCF step, a great speedup can be obtained and a lot of memory can be saved. As mentioned above, the iVI method can reduce the memory required for TDDFT calculation to a certain extent without introducing any errors. The MPEC+COSX method <MPECCOSX> reduces the calculation time of TDDFT to about 1/10~1/3 (depending on the size of the basis set and the size of the system) at the cost of introducing a very small (generally less than 0.01 eV) error. However, if the requirements for the accuracy of the results are lower, for example, even an error of the order of 0.2 eV is acceptable, the sTDA and sTDDFT sTDA_RSH methods developed by Grimme's group can be used to accelerate the TDDFT calculation, which can be tens to hundreds of times faster than ordinary TDDFT. In BDF, the ''grimmestd'' keyword can be used to specify the use of the sTDA or sTDDFT method.
 
 For example, the following example uses sTDDFT to calculate the absorption spectrum of chlorophyll a (137 atoms):
 
@@ -973,10 +969,10 @@ For example, the following example uses sTDDFT to calculate the absorption spect
      C                 -3.86800400    2.56481900    1.82052600
      C                 -8.08215800    3.98978800   -0.18167200
      C                 -8.98545300   -0.61768600   -1.64547000
-     N -4.54433200 0.38436500 0.90884900
+     N                 -4.54433200    0.38436500    0.90884900
      C                 -3.99700200   -0.93553500    0.86684800
      C                 -3.70478200    1.19580500    1.58959100
-     N -6.02943300 2.90039700 0.68978700
+     N                 -6.02943300    2.90039700    0.68978700
      C                 -4.94074100    3.33410600    1.39121000
      C                 -5.07491500    4.81749500    1.63863600
      C                 -6.24086300    5.22118200    1.06806800
@@ -984,13 +980,13 @@ For example, the following example uses sTDDFT to calculate the absorption spect
      C                 -4.06725100    5.61005500    2.36565900
      C                 -6.80943200    6.56357900    1.03550500
      C                 -7.16536900    7.19003700   -0.08627800
-     N -8.20213100 1.58193300 -0.75743000
+     N                 -8.20213100    1.58193300   -0.75743000
      C                 -8.71213700    2.83175300   -0.76290000
      C                -10.01431500    2.85490100   -1.44851000
      C                -10.27039900    1.56409200   -1.85400400
      C                 -9.13329500    0.73615200   -1.42942600
      C                -10.84075600    4.06541800   -1.63406700
-     N -6.79660200 -0.84366300 -0.52933900
+     N                 -6.79660200   -0.84366300   -0.52933900
      C                 -7.89913200   -1.40200500   -1.24381700
      C                 -7.66635200   -2.82277100   -1.44961100
      C                 -6.43617900   -3.10668000   -0.86460900
@@ -1002,44 +998,44 @@ For example, the following example uses sTDDFT to calculate the absorption spect
      C                 -4.03436300   -4.04185800    1.55541600
      O                 -2.98821400   -4.06496400    2.17129100
      O                 -5.18821800   -4.55887600    2.07822700
-     C -5.09043500 -5.21072200 3.37451000
-     H -3.08326400 3.06907300 2.38501100
-     H -8.64877900 4.92413800 -0.27855400
-     H -9.79244500 -1.13563000 -2.18571200
-     H -3.93018000 5.23884000 3.39358500
-     H -3.08555400 5.56125900 1.86717500
-     H -4.34148300 6.67290700 2.43393200
-     H -6.91464100 7.03432600 2.01872100
-     H -7.57843000 8.18875500 -0.09998800
-     H -7.06020700 6.75751400 -1.07293700
-     H -8.14333300 -4.77543300 -2.17957800
-     H -8.75310000 -3.45058300 -3.18537500
-     H -9.54347000 -3.83344900 -1.64123300
-     H -6.14095000 -5.40216500 3.61932300
-     H -4.61251400 -4.54263500 4.09691600
-     H -4.52176200 -6.13925800 3.26271900
-     H -11.76604400 3.85006500 -2.18728300
-     H -10.29928900 4.83683900 -2.20105400
-     H -11.13298700 4.50356100 -0.66841600
-     H -3.34289100 -3.55371300 -0.41277200
-     C -11.45722200 1.05206800 -2.59092400
-     H -11.76806300 0.06727900 -2.18361200
-     H -12.32721500 1.72374600 -2.42522700
-     C -11.17530300 0.93618900 -4.08970000
-     H -10.32963900 0.26795200 -4.29109700
-     H -12.04576500 0.54981100 -4.62999500
-     H -10.91967800 1.91226500 -4.52115700
-     C -2.62887700 -0.98246300 1.53480600
-     H -2.66523600 -1.73547400 2.36545400
-     C -2.45989500 0.45470900 2.10966600
-     H -1.54474300 0.93905400 1.69345300
-     C -1.51912600 -1.36887400 0.54488500
-     H -1.95440500 -1.82032400 -0.37473000
-     H -0.98048400 -0.46992100 0.18497700
-     C -0.53490800 -2.35906300 1.17264300
-     H -0.01435300 -1.91575300 2.04669100
-     H -1.09048500 -3.24472000 1.58712500
-     C 0.45366200 -2.85133200 0.15756500
+     C                 -5.09043500   -5.21072200 3.37451000
+     H                 -3.08326400    3.06907300 2.38501100
+     H                 -8.64877900    4.92413800 -0.27855400
+     H                 -9.79244500   -1.13563000 -2.18571200
+     H                 -3.93018000    5.23884000 3.39358500
+     H                 -3.08555400    5.56125900 1.86717500
+     H                 -4.34148300    6.67290700 2.43393200
+     H                 -6.91464100    7.03432600 2.01872100
+     H                 -7.57843000    8.18875500 -0.09998800
+     H                 -7.06020700    6.75751400 -1.07293700
+     H                 -8.14333300   -4.77543300 -2.17957800
+     H                 -8.75310000   -3.45058300 -3.18537500
+     H                 -9.54347000   -3.83344900 -1.64123300
+     H                 -6.14095000   -5.40216500 3.61932300
+     H                 -4.61251400   -4.54263500 4.09691600
+     H                 -4.52176200   -6.13925800 3.26271900
+     H                -11.76604400    3.85006500 -2.18728300
+     H                -10.29928900    4.83683900 -2.20105400
+     H                -11.13298700    4.50356100 -0.66841600
+     H                 -3.34289100   -3.55371300 -0.41277200
+     C                -11.45722200    1.05206800 -2.59092400
+     H                -11.76806300    0.06727900 -2.18361200
+     H                -12.32721500    1.72374600 -2.42522700
+     C                -11.17530300    0.93618900 -4.08970000
+     H                -10.32963900    0.26795200 -4.29109700
+     H                -12.04576500    0.54981100 -4.62999500
+     H                -10.91967800    1.91226500 -4.52115700
+     C                 -2.62887700   -0.98246300 1.53480600
+     H                 -2.66523600   -1.73547400 2.36545400
+     C                 -2.45989500   0.45470900 2.10966600
+     H                 -1.54474300   0.93905400 1.69345300
+     C                 -1.51912600 -1.36887400 0.54488500
+     H                 -1.95440500 -1.82032400 -0.37473000
+     H                 -0.98048400 -0.46992100 0.18497700
+     C                 -0.53490800 -2.35906300 1.17264300
+     H                 -0.01435300 -1.91575300 2.04669100
+     H                 -1.09048500 -3.24472000 1.58712500
+     C                 0.45366200 -2.85133200 0.15756500
      O                  0.32298700   -3.00078100   -1.03465600
      O                  1.62455500   -3.17223400    0.80990800
      C 2.74348900 -3.67458400 0.01127500
@@ -1168,7 +1164,7 @@ In contrast, the traditional TDDFT calculation (the same as the input file above
        12   A   13   A    4.0449 eV        306.52 nm   0.0860   0.0000  72.5%  CV(0):   A( 234 )->   A( 242 )   4.532 0.644    1.8351
        13   A   14   A    4.0913 eV        303.04 nm   0.0021   0.0000  95.9%  CV(0):   A( 237 )->   A( 243 )   4.601 0.264    1.8815
 
-It can be seen that the difference between the excitation energies of the two calculations is very small, in the order of 0.0~0.2 eV. On the surface, there are some states with very different oscillator intensities, but this is the result of the mixing of states with very close excitation energies, and if a spectral plot is made (see plot<plotspec> Gaussian broadened absorption spectra', the absorption spectra of sTDDFT and TDDFT are basically the same, and the difference between them is within the normal error range of the DFT calculation:
+It can be seen that the difference between the excitation energies of the two calculations is very small, in the order of 0.0~0.2 eV. Obviously, there are some states with very different oscillator intensities, but this is the result of the mixing of states with very close excitation energies, and if a spectral plot is made (see plot<plotspec> Gaussian broadened absorption spectra', the absorption spectra of sTDDFT and TDDFT are similar, and the difference between them is within the normal error range of the DFT calculation:
 
 .. figure:: /images/sTDDFT-example.png
    :width: 800
@@ -1198,12 +1194,12 @@ Of course, it is also possible to specify the number of excited states calculate
     grimmestd
     $end
 
-For more considerations, see Grimmestd Keyword Introduction <grimmestd>.
+For more information, see Grimmestd Keyword Introduction <grimmestd>.
 
 Restart the TDDFT task that was unexpectedly interrupted
 -------------------------------------------------------
 
-If the TDDFT calculation is terminated unexpectedly, the user may want to reschedule the calculation, that is, when the TDDFT calculation is redone, some intermediate results generated by the previously interrupted TDDFT task are used to reduce or avoid double calculation. For details on how to calculate the breakpoint restart of TDDFT, see the corresponding introduction in the FAQ chapter <tddftrestart>.
+If the TDDFT calculation is terminated unexpectedly, the user may want to reschedule the calculation, that is, when the TDDFT calculation is redone, some intermediate results generated by the previously interrupted TDDFT task are used to reduce or avoid redundant calculation. For details on how to calculate the breakpoint restart of TDDFT, see the corresponding introduction in the FAQ chapter <tddftrestart>.
 
 .. _plotspec:
 Mapping of Gaussian broadened absorption spectra
@@ -1326,17 +1322,17 @@ In addition to absorption spectra, BDF also supports the calculation of circular
       C   12.57384005718525     -1.02456284484694     18.65658561738920
       C   12.91529117412091      0.43177145174825     18.82255138315294
       C   11.83078974644673      1.23189442235475     18.82242608164620
-      H 10.67388955940226 -1.47007769437446 19.61628109972719
-      H 13.00096293117676 -1.40629079282790 17.71067917782706
-      H 13.02306939327327 -1.63533989080155 19.45869631125239
-      H 13.94838829748073 0.77963695466942 18.91842719115154
-      H 11.81586135485978 2.32060314334658 18.90537981712256
+      H   10.67388955940226     -1.47007769437446     19.61628109972719
+      H   13.00096293117676     -1.40629079282790     17.71067917782706
+      H   13.02306939327327     -1.63533989080155     19.45869631125239
+      H   13.94838829748073      0.77963695466942     18.91842719115154
+      H   11.81586135485978      2.32060314334658     18.90537981712256
       C   10.61010494985639      0.41685642111484     18.65633627754937
-      O   9.46516754355473      0.82239910074197     18.54006339565965
+      O    9.46516754355473      0.82239910074197     18.54006339565965
       C   10.37591484801120     -1.85714650215417     17.51891751829459
-      H 10.61141701850992 -2.93014535161767 17.59810807151853
-      H 9.28153845878811 -1.73962079399751 17.55678289237466
-      H 10.72376849425688 -1.50217177978463 16.53426564058783
+      H   10.61141701850992     -2.93014535161767     17.59810807151853
+      H    9.28153845878811     -1.73962079399751     17.55678289237466
+      H   10.72376849425688     -1.50217177978463     16.53426564058783
     End Geometry
     MPEC+COSX
     $END
@@ -1370,7 +1366,7 @@ In addition to absorption spectra, BDF also supports the calculation of circular
              # is large
     $end
 
-After the output of the absorption wavelength, oscillator intensity, and transition dipole moment, the transition magnetic dipole moment, and the rotor strength under the length and velocity manifestations are also output:
+After the output of the absorption wavelength, oscillator intensity, and transition dipole moment, the transition magnetic dipole moment, and the rotor strength under the length and velocity manifestations are also printed:
 
 .. code-block:: bdf
 
@@ -1409,8 +1405,8 @@ Here are the results:
 
 .. note::
 
-    1. Although the rotor strength under the velocity surface and the rotor strength under the length surface are strictly equal when the basis set tends to be complete, when the size of the basis group is limited, the rotor strength under the velocity surface does not depend on the orientation and center position of the molecule, but the rotor strength under the length surface is dependent on the orientation and center position of the molecule. Therefore, at least when the molecule is relatively large and the base set is not too large, the rotor strength results under the velocity surface are more reliable. plotspec.py by default, the ECD diagram is plotted with the rotor strength under the velocity representation, if you need to use the rotor strength under the length representation to plot the ECD diagram, you should change the -cd in the command line argument of the plotspec.py to -cdl.
-    2. Due to the difference between BDF and other programs to determine the molecular standard orientation and the origin of molecular coordinates, the rotor strength calculated by BDF under the length representation may be slightly different from other programs, which is a normal phenomenon and is caused by the theoretical defects of the rotor strength under the above length representation, and does not mean that the calculation results are wrong. However, the rotor strength under the speed gauge should be in good agreement with other procedures.
+    1. Although the rotor strength under the velocity gauge and the rotor strength under the length gauge are strictly equal when the basis set tends to be complete, when the size of the basis set is limited, the rotor strength under the velocity gauge does not depend on the orientation and center position of the molecule, but the rotor strength under the length gauge is dependent on the orientation and center position of the molecule. Therefore, at least when the molecule is relatively large and the basis set is not too large, the rotor strength results under the velocity gauge are more reliable. plotspec.py by default, the ECD diagram is plotted with the rotor strength under the velocity gauge, if you need to use the rotor strength under the length gauge to plot the ECD diagram, you should change the -cd in the command line argument of the plotspec.py to -cdl.
+    2. Due to the difference between BDF and other programs to determine the molecular standard orientation and the origin of molecular coordinates, the rotor strength calculated by BDF under the length representation may be slightly different from other programs, which is a normal phenomenon and is caused by the theoretical defects of the rotor strength under the above length gauge, and does not mean that the calculation results are wrong. However, the rotor strength under the velocity gauge should be in good agreement with other procedures.
     3. For flexible molecules, the ECD calculation results of a single conformation are not reliable, it is recommended to combine CREST, Molclus and other software to perform conformational search, calculate the ECD spectra for all major conformations separately, and then perform Boltzmann weighted average.
 
 Optimization of excited state structure
@@ -1429,16 +1425,16 @@ The following is an example of optimizing the structure of the first excited sta
   Basis
    CC-PVDZ
   Geometry # Coordinates in Angstrom. The structure has C(2h) symmetry
-   C                 -1.85874726   -0.13257980    0.00000000
-   H -1.95342119 -1.19838319 0.00000000
-   H -2.73563916 0.48057645 0.00000000
-   C                 -0.63203020    0.44338226    0.00000000
-   H -0.53735627 1.50918564 0.00000000
-   C                  0.63203020   -0.44338226    0.00000000
-   H 0.53735627 -1.50918564 0.00000000
-   C                  1.85874726    0.13257980    0.00000000
-   H 1.95342119 1.19838319 0.00000000
-   H 2.73563916 -0.48057645 0.00000000
+   C -1.85874726  -0.13257980  0.00000000
+   H -1.95342119  -1.19838319  0.00000000
+   H -2.73563916   0.48057645  0.00000000
+   C -0.63203020   0.44338226  0.00000000
+   H -0.53735627   1.50918564  0.00000000
+   C  0.63203020  -0.44338226  0.00000000
+   H  0.53735627  -1.50918564  0.00000000
+   C  1.85874726   0.13257980  0.00000000
+   H  1.95342119   1.19838319  0.00000000
+   H  2.73563916  -0.48057645  0.00000000
   End Geometry
   $END
 
@@ -1487,7 +1483,7 @@ The following is an example of optimizing the structure of the first excited sta
 
 Note that in the above example, the meaning of the keyword ''iroot'' in the ''$resp'' module is different from the keyword '''iroot'' in the ''$tddft'' module. The former refers to the calculation of the gradient of the first few excited states, while the latter refers to the number of excited states that are calculated in total for each irreducible representation.
 
-After the structure is optimized and converged, the converged structure is output in the main output file:
+After the molecular structure is optimized and converged, the converged structure is output in the main output file:
 
 .. code-block::
 
@@ -1495,15 +1491,15 @@ After the structure is optimized and converged, the converged structure is outpu
 
      Molecular Cartesian Coordinates (X,Y,Z) in Angstrom :
         C          -1.92180514       0.07448476       0.00000000
-        H -2.21141426 -0.98128927 0.00000000
-        H -2.70870517 0.83126705 0.00000000
+        H          -2.21141426      -0.98128927       0.00000000
+        H          -2.70870517       0.83126705       0.00000000
         C          -0.54269837       0.45145649       0.00000000
-        H -0.31040658 1.52367715 0.00000000
+        H          -0.31040658       1.52367715       0.00000000
         C           0.54269837      -0.45145649       0.00000000
-        H 0.31040658 -1.52367715 0.00000000
+        H           0.31040658      -1.52367715       0.00000000
         C           1.92180514      -0.07448476       0.00000000
-        H 2.21141426 0.98128927 0.00000000
-        H 2.70870517 -0.83126705 0.00000000
+        H           2.21141426       0.98128927       0.00000000
+        H           2.70870517      -0.83126705       0.00000000
 
                          Force-RMS    Force-Max     Step-RMS     Step-Max
       Conv. tolerance :  0.2000E-03   0.3000E-03   0.8000E-03   0.1200E-02
@@ -1528,17 +1524,16 @@ Among them, the wavelength corresponding to the excitation energy under the exci
 
 .. note::
 
-    The optimized excited state structure of some systems will oscillate without convergence, which is generally due to the optimization near the conical intersection. If the optimization is near the cone intersection of the excited state and the ground state, and full TDDFT is used instead of TDA, the structure optimization may even be error-exited due to the excitation energy becoming imaginary or complex. These two situations are normal, and the causes and solutions are detailed in Geometric Optimization Non-Convergent Solution <geomoptnotconverged>.
+    The optimized excited state structure of some systems will oscillate without convergence, which is generally due to the optimization near the conical intersection. If the optimization is near the conical intersection of the excited state and the ground state, and full TDDFT is used instead of TDA, the structure optimization may even be error-exited due to the excitation energy becoming imaginary or complex. These two situations are normal, and the causes and solutions are detailed in Geometric Optimization Non-Convergent Solution <geomoptnotconverged>.
 
 Spin-orbit coupling calculation based on sf-X2C/TDDFT-SOC
 ----------------------------------------------------------
 
-Relativistic effects include scalar relativity and spin-orbit coupling (SOC). Relativistic calculations require the use of a base group optimized for relativistic effects,
+Relativistic effects include scalar relativity and spin-orbit coupling (SOC). Relativistic calculations require the use of a basis set optimized for relativistic effects,
 and choose the right Hamiltonian**. BDF supports all-electron sf-X2C/TDDFT-SOC calculations, where sf-X2C refers to the consideration of scalar relativistic effects by Hamiltonian of an exact two-component (X2C) without spin, and TDDFT-SOC refers to the calculation of spin-orbit coupling based on TDDFT. Note that although TDDFT is an excited state method, TDDFT-SOC can be used to calculate the contribution of SOC not only to the energy and properties of the excited state, but also to calculate the contribution of SOC to the energy and properties of the ground state.
 
-Taking a molecule with a ground state as a singlet as an example, the sf-X2C/TDDFT-SOC calculation needs to be called three times in order to complete the calculation of sf-X2C/TDFT-SOC. Among them, the first execution uses R-TDDFT to calculate the singlet state,
-The second time the triplet state was calculated by SF-TDDFT, and the wave function calculated by the first two TDDFT was read in for the last time, and the state interaction (SI) method was used
-Calculate the spin-orbit couplings for these states. This is clearly seen from the high-level inputs for the sf-X2C/TDDFT-SOC calculation for the :math:'\ce{CH2S}' molecule below.
+Taking a molecule with a ground state as a singlet as an example, the sf-X2C/TDDFT-SOC calculation needs to call TDDFT three times in order to complete the calculation. Among them, the first calculation uses R-TDDFT to compute the singlet state,
+The second time the triplet state was calculated by SF-TDDFT, and wave functions calculated by the first two TDDFT was read in for the last time, and the state interaction (SI) method was used to calculate the spin-orbit couplings for these states. This is clearly seen from the advanced inputs for the sf-X2C/TDDFT-SOC calculation for the :math:'\ce{CH2S}' molecule below.
 
 .. code-block:: bdf
 
@@ -1550,8 +1545,8 @@ Calculate the spin-orbit couplings for these states. This is clearly seen from t
    Geometry
    C       0.000000    0.000000   -1.039839
    S       0.000000    0.000000    0.593284
-   H 0.000000 0.932612 -1.626759
-   H 0.000000 -0.932612 -1.626759
+   H       0.000000    0.932612   -1.626759
+   H       0.000000   -0.932612   -1.626759
    End geometry
    $END
    
@@ -1802,8 +1797,8 @@ The output of the transition dipole moment is as follows:
 TDDFT-SOC spin-orbit coupling calculation using ECP base set
 ----------------------------------------------------------
 
-In addition to the sf-X2C all-electron scalar relativistic Hamiltonian, the pseudopotential can also be used for TDDFT-SOC spin-orbit coupling calculations, in which the rotation-orbit coupling pseudopotential (SOECP) is the first choice.
-To do this, you need to select the appropriate Orbit-Coupled Pseudopotential Basis Set <soecp-bas> and set the hsoc to 10 in the Xuanyuan module (you can also write other values,
+In addition to the sf-X2C all-electron scalar relativistic Hamiltonian, the pseudopotential can also be used for TDDFT-SOC spin-orbit coupling calculations, in which the spin-orbit coupling pseudopotential (SOECP) is the first choice.
+To do this, you need to select the appropriate spin-orbit-coupled Pseudopotential Basis Set <soecp-bas> and set the hsoc to 10 in the Xuanyuan module (you can also write other values,
 But it will be treated as 10).
 Other inputs are similar or identical to the sf-X2C/TDDFT-SOC inputs (e.g. core electrons are excluded when specifying orbital occupancy in ''scf'').
 
@@ -1900,10 +1895,10 @@ The calculated output of SOECP/TDFT-SOC is similar to that of the sf-X2C/TDDFT-S
     |                     |             | 1   |     38423   |        98   |              |             |
     +---------------------+-------------+-----+-------------+-------------+--------------+-------------+
 
-In addition to the SOECP baseset, the above calculation can also be done with a scalar ECP baseset combined with the effective nuclear charge approximation (Zeff) <so1e-zeff>'.
-As a test, first remove the SO pseudopotential part of the Br base group and redo the above calculation, but you will find that the results are poor:
+In addition to the SOECP basis set, the above calculation can also be done with a scalar ECP basis set combined with the effective nuclear charge approximation (Zeff) <so1e-zeff>'.
+As a test, first remove the SO pseudopotential part of the Br basis set and redo the above calculation, but you will find that the results are poor:
 The split between :math:'^3\Pi_2' and :math:'^3\Pi_1' is only 850 cm :math:'^{-1}', while the split between :math:'^3\Sigma^+' is almost zero.
-This is because the ECP base set of Br with 10 cores does not have a specially optimized effective nuclear charge, and the program can only take the actual number of nuclear charges35:
+This is because the ECP base set of Br with 10 cores does not have a specially optimized effective nuclear charge, and the program can only take the actual number of nuclear charges 35:
 
 .. code-block::
 
@@ -1916,7 +1911,7 @@ This is because the ECP base set of Br with 10 cores does not have a specially o
       2 35 10 N.A.
   ----------------------------------
 
-For Br in the above example, you may wish to use the scalar ECP base set cc-pVTZ-ccECP with 28 core electrons instead, and the input part of the base set is modified as follows:
+For Br in the above example, you may wish to use the scalar ECP base set cc-pVTZ-ccECP with 28 core electrons instead, and the input part of the basis set is modified as follows:
 
 .. code-block:: bdf
 
@@ -1939,7 +1934,7 @@ Track occupancy is not specified in modules after xuanyuan, so there is no need 
   ----------------------------------
 
 This shows that in the single-electron spin-orbit integral of Br, the default nuclear charge number 35 is replaced with an optimized 1435.000 (in general, the larger the ECP core electron number NCore, the larger the effective nuclear charge Zeff),
-SOECP integrals are still calculated for the In atom. The results are as follows, and it can be seen that the rotor splitting has been significantly improved:
+SOECP integrals are still calculated for the In atom. The results are as follows, and it can be seen that the SOC splitting has been significantly improved:
 
 .. table:: TDDFT-SOC vertical excitation energies of InBr molecules: In:SOECP, Br:SOECP and Br:ECP. Energy unit: cm:math:'^{-1}'
     :widths: auto
@@ -1965,24 +1960,24 @@ SOECP integrals are still calculated for the In atom. The results are as follows
     |                     |             | 1   |     38423   |        98   |     38853   |        65   |
     +---------------------+-------------+-----+-------------+-------------+-------------+-------------+
 
-Finally, TDDFT-SOC calculations can also be combined with SOECP (or scalar ECP) basis sets with all-electron non-relaturistic basis sets.
+Finally, TDDFT-SOC calculations can also be combined with SOECP (or scalar ECP) basis sets with all-electron non-relativistic basis sets.
 The BDF program has optimized Zeff for the all-electron non-relativistic basis set of the main group elements prior to Xe (except for the heavier noble gas elements).
 For example, if you continue to use cc-pVTZ-PP for In, and cc-pVTZ for Br, you will get similar results to SOECP/TDDFT-SOC. Detailed results omitted.
 
 .. attention::
 
    1. Precautions when using the effective nuclear charge method for TDDFT-SOC calculations: Optimized effective nuclear charge <SO1e-zeff>' must be used to ensure accuracy. To do this, check the Zeff value printed in the output file and try not to show N.A., which is especially important for the ECP baseset.
-   2. Notes on all-electron basis groups when combining SOECP or scalar ECP with all-electron basis groups: Since atoms using all-electron basis groups do not consider scalar relativistic correspondence, they cannot be heavy atoms, and non-relativistic basis groups must be used.
+   2. Notes on all-electron basis sets when combining SOECP or scalar ECP with all-electron basis groups: Since atoms using all-electron basis sets do not consider scalar relativistic correspondence, they cannot be heavy atoms, and non-relativistic basis sets must be used.
 
 
 Calculation of the first-order non-adiabatic coupled matrix element (fo-NACME).
 -------------------------------------------------------
 
-As mentioned earlier, (first-order) non-adiabatic coupling matrix elements are of great significance in the non-radiative transition process, and one of their main uses is to calculate the internal slew rate constant (see azulene-example> for calculating the internal slew rate constant with BDF-MOMAP< ). In BDF, there are some differences in how the NACME input files between the ground state and the excited state, and between the excited state and the excited state are written separately.
+As mentioned earlier, (first-order) non-adiabatic coupling matrix elements are of great significance in the non-radiative transition process, and one of their main uses is to calculate the internal convension rate constant (see azulene-example> for calculating the internal convension rate constant with BDF-MOMAP< ). In BDF, there are some differences in how the NACME input files between the ground state and the excited state, and between the excited state and the excited state are written separately.
 
 .. note::
 
-    NACME between ground state and excited state, and NACME between excited state and excited state support R-TDDFT and U-TDDFT, but X-TDDFT is not supported for the time being.
+    NACME between ground state and excited state, and NACME between excited state and excited state support R-TDDFT and U-TDDFT, but X-TDDFT is not supported.
 
 (1) NACME between ground state and excited state: :math:'\ce{NO3}' radical D0/D1 NACME (GB3LYP/cc-pVDZ)
 
@@ -2199,16 +2194,16 @@ Localization of excited states
    Geometry
      C      0.000000    0.000000  0.000000
      C      1.332000    0.000000  0.000000
-     H -0.574301 -0.928785 0.000000
-     H -0.574301 0.928785 0.000000
-     H 1.906301 0.928785 0.000000
-     H 1.906301 -0.928785 0.000000
-     C     -0.000000    0.000000  3.5000
-     C      1.332000   -0.000000  3.5000
-     H -0.574301 0.928785 3.50000
-     H -0.574301 -0.928785 3.50000
-     H 1.906301 -0.928785 3.50000
-     H 1.906301 0.928785 3.50000
+     H     -0.574301   -0.928785  0.000000
+     H     -0.574301    0.928785  0.000000
+     H      1.906301    0.928785  0.000000
+     H      1.906301   -0.928785  0.000000
+     C     -0.000000    0.000000  3.500000
+     C      1.332000   -0.000000  3.500000
+     H     -0.574301    0.928785  3.500000
+     H     -0.574301   -0.928785  3.500000
+     H      1.906301   -0.928785  3.500000
+     H      1.906301    0.928785  3.500000
    End geometry
    Group
     C(1)
@@ -2260,7 +2255,7 @@ TDA calculates 4 excited states and the output is as follows,
     3   A    4   A    9.0292 eV    137.31 nm   0.0000   0.0000  62.4%  CV(0):   A(  16 )->   A(  20 )  15.353 0.398    1.5422
     4   A    5   A    9.0663 eV    136.75 nm   0.0000   0.0000  50.4%  CV(0):   A(  15 )->   A(  18 )  15.688 0.390    1.5793
 
-The process of localization and the excited states of localization are as follows,
+The process of localization of the excited states is as follows,
 
 .. code-block:: bdf
 

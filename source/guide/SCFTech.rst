@@ -3,14 +3,14 @@ Other techniques for self-consistent field calculations
 
 Initial guess of the self-consistent field calculation
 ------------------------------------------------
-The initial guess orbit of the self-consistent field calculation has a great influence on the convergence of the calculation. BDF supports a variety of initial guesses, as follows:
+The initial guess orbital of the self-consistent field calculation has a great influence on the convergence of the calculation. BDF supports a variety of initial guesses, as follows:
 
-  * Atom : Combine molecular density matrix guessing with atomic density matrix, default option.
+  * Atom : The molecular density matrix guessing from supper postion of atomic density matrices of each atom, default option.
   * Huckel: Semi-empirical Huckel method guessing;
   * Hcore : Diagonalized single electron Hamiltonian guess;
   * Readmo : Read into the molecular orbital as an initial guess;
 
-By default, BDF uses Atom to guess. In concise input mode, the initial guess of the BDF can be changed using the keyword ''guess'', as shown below
+By default, BDF uses Atom to guess. In easy input mode, the initial guess of the BDF can be changed using the keyword ''guess'', as shown below
 
 .. code-block:: bdf
 
@@ -20,10 +20,10 @@ By default, BDF uses Atom to guess. In concise input mode, the initial guess of 
     geometry    # notice: unit in Bohr 
     C       0.1727682300       -0.0000045651       -0.8301598059
     C      -2.3763311896        0.0000001634        0.5600567139
-    H 0.0151760290 0.0000088544 -2.9110013387
-    H -2.0873396672 0.0000037621 2.5902220967
-    H -3.4601725077 -1.6628370597 0.0320271859
-    H -3.4601679801 1.6628382651 0.0320205364
+    H       0.0151760290        0.0000088544       -2.9110013387
+    H      -2.0873396672        0.0000037621        2.5902220967
+    H      -3.4601725077       -1.6628370597        0.0320271859
+    H      -3.4601679801        1.6628382651        0.0320205364
     O       2.2198078005        0.0000024315        0.2188182082
     end geometry
 
@@ -54,7 +54,7 @@ Here, in the second line, we use the keyword ''guess=Hcore''' to specify the use
   19    0   0.000 -152.8418195227 -0.000000000  0.000000078  0.000000848  0.0000   0.03
 
 .. warning:: 
-   In this example, the unit of the numerator's input coordinates is Bohr, and the length unit of the coordinates must be specified as ''Bohr'' using the keyword ''unit=Bohr'''.
+   In this example, the unit of the input coordinates is Bohr, and the length unit of the coordinates must be specified as ''Bohr'' using the keyword ''unit=Bohr'''. On default, Angstrom is used.
 
 The high-level input for this study is 
 

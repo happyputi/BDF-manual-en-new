@@ -1,12 +1,12 @@
-Concise Input Keywords
+Easy Input Keywords
 ===============================
 
 ### Required Parameters: :guilabel:`Method/Functional/Basis`, :guilabel:`Functional/Basis`, :guilabel:`Method/Basis`
 ----------------------------------------------------------------------------------------
-Required parameters in concise input mode are used to set computational methods, functionals for DFT/TDDFT calculations, basis sets, etc. Currently supported computational methods include:
+Required parameters in easy input mode are used to set computational methods, functionals for DFT/TDDFT calculations, basis sets, etc. Currently supported computational methods include:
 
 +-------------------+------------------------------------------------------------------+
-| Method              | Functionality                                                     |
+| Method            | Functionality                                                    |
 +-------------------+------------------------------------------------------------------+
 |HF                 | Hatree-Fock                                                      |
 +-------------------+------------------------------------------------------------------+
@@ -70,8 +70,8 @@ Default: `DKH1e+mf1c`
 Options: `DKH1e+mf1c`, `DKH1e`, `BP`; `DKH1e+mf1c` for all-electron calculations, `BP` operator for relativistic effective potentials.
 
 .. note::
-  * **Default Principle**: If Hamiltonian is specified, BDF will select appropriate Hamiltonian based on basis functions. For all-electron basis sets considering relativistic effects or non-relativistic all-electron basis sets, scalar terms use **sf-X2C** Hamiltonian, spin-orbit coupling operator uses **DKH1e+mf1c**. Users can forcibly set to **DKH1e**, but this may introduce significant errors for light elements. For relativistic effective potentials and basis sets, the potential already includes relativistic effects, so no Hamiltonian needs to be set; SOC operator defaults to BP.
-  * User input `TDDFT/functional/basis SOC` (using SOC keyword) is equivalent to setting `X-TDDFT/functional/basis`, with Hamiltonian and SOC operators set according to default principles.
+  * **Default Principle**: If Hamiltonian is specified, BDF will select appropriate Hamiltonian based on basis functions. For all-electron basis sets considering relativistic effects or non-relativistic all-electron basis sets, scalar terms use **sf-X2C** Hamiltonian, spin-orbit coupling operator uses **DKH1e+mf1c**. Users can set to **DKH1e**, but this may introduce significant errors for light elements. For relativistic effective potentials and basis sets, the potential already includes relativistic effects, so no Hamiltonian needs to be set; SOC operator defaults to BP.
+  * Users input `TDDFT/functional/basis SOC` (using SOC keyword) is equivalent to setting `X-TDDFT/functional/basis`, with Hamiltonian and SOC operators set according to default principles.
 
 **Coordinate Units, Charge, and Spin Multiplicity**
 
